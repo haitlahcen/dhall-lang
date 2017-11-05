@@ -1,5 +1,3 @@
-# Programmable configuration files
-
 This section describes what a "programmable configuration file" is and the types
 of problems that programmable configuration files solve.
 
