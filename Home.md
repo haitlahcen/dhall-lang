@@ -1,1 +1,3 @@
-Welcome to the dhall-lang wiki!
+The Dhall wiki is currently under construction
+
+Feel to browse the existing material if you want
