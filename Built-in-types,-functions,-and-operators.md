@@ -479,12 +479,12 @@ Natural/isZero (x * y) = Natural/isZero x || Natural/isZero y
 ### Example
 
 ```bash
-$ dhall <<< 'Natural/fold +40 Text (λ(t : Text) → t ++ "!") "You're welcome"'
+$ dhall <<< 'Natural/fold +40 Text (λ(t : Text) → t ++ "!") "Hello"'
 ```
 ```haskell
 Text
 
-"You're welcome!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+"Hello!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 ```
 
 ### Type
