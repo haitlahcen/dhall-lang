@@ -45,12 +45,9 @@ Install the Nix package manager by following the instructions here:
 The installer for the Nix package manager will then remind you to open a new
 terminal to update your shell environment.  Don't forget to do this!
 
-> **OS X users:** If you are using the High Sierra release of OS X, run the
-> following command if [this issue][high-sierra-bug] is still not fixed:
->
-> ```bash
-> $ sudo sh -c 'echo "build-max-jobs = 1" >> /etc/nix/nix.conf'
-> ```
+> **OS X users:** If you are using the High Sierra release of OS X, make
+> sure that you have OS X version 10.13.2 or newer and Nix version 1.11.15
+> or newer.
 
 Run the following commands to install the `dhall-json` package using the Nix
 package manager:
@@ -78,9 +75,13 @@ $ dhall-to-json --help
 
 ### Install using `stack`, the Haskell build tool (Recommended for Windows)
 
+> **Windows users**: Install [Git for Windows](http://gitforwindows.org/), which
+> includes Git Bash: a command line environment complete with Unix utilities.
+> Run the following commands within a Git Bash shell.
+
 > **Linux and OS X users**: This installation method will also work on Linux and
 > OS X.  However, this tutorial recommends using the Nix package manager over
-> `stack` because Nix will dwonload a prebuilt executable whereas `stack` will
+> `stack` because Nix will download a pre-built executable whereas `stack` will
 > compile the `dhall-json` package from source.
 
 Install `stack` by following the instructions on <https://haskellstack.org>
@@ -92,10 +93,11 @@ $ stack setup
 $ stack install dhall-json
 ```
 
-This will install the `dhall-to-json` and `dhall-to-yaml` executables underneath
-the `~/.local/bin` directory.
+This will install the `dhall-to-json` and `dhall-to-yaml` executables to
+some shared directory (such as `%APPDATA%\local\bin` on Windows or
+`~/.local/bin` on Linux / OS X).
 
-`stack` will remind you to add the `~/.local/bin` directory to your executable
+`stack` will remind you to add the above shared directory to your executable
 search `PATH`.  Don't forget to do this!
 
 Run the following command to verify that `stack` installed the executable:
@@ -345,7 +347,15 @@ Dhall also lets you write anonymous functions of the form:
 ```
 
 This tutorial will use the Unicode syntax for functions in the following
-examples.
+examples.  If you prefer the Unicode syntax you can learn how to input
+Unicode on your computer by following these instructions:
+
+* [Wikipedia - Unicode input](https://en.wikipedia.org/wiki/Unicode_input)
+
+... and using the following Unicode code points for lambdas and arrows:
+
+* `λ` (U+03BB)
+* `→` (U+2192)
 
 For example, here is an anonymous function that takes a single argument named
 `x` of type `Integer` and returns a list of two `x`s:
@@ -446,8 +456,8 @@ $ dhall-to-json <<< 'let both = λ(x : Integer) → λ(y : Integer) → [x, y] i
 
 ## Combining records
 
-Dhall provides the `/\` operator for merging two records (which you can also
-represent using the Unicode `∧` character).
+Dhall provides the `/\` operator for merging two records, which you can also
+represent using the Unicode `∧` character (U+2227).
 
 For example:
 
