@@ -719,7 +719,7 @@ Text
 ```
 Γ ⊢ x : Text   Γ ⊢ y : Text
 ───────────────────────────
-Γ ⊢ x && y : Text
+Γ ⊢ x ++ y : Text
 ```
 
 ### Rules
