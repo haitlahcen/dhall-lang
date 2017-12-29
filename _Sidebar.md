@@ -6,4 +6,5 @@
 * How-to guide
     * [[Cheatsheet|Cheatsheet]]
 * Reference
+    * [[Language standard|Language standard]]
     * [[Built in types, functions, and operators|Built in types, functions, and operators]]
