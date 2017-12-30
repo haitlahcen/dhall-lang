@@ -231,6 +231,45 @@ Available options:
 > ... and read the full explanation for why the executable rejected the Dhall
 > expression
 
+Dhall also supports type annotations, which are the Dhall analog of a JSON
+schema.  For example:
+
+```bash
+$ dhall-to-json <<< '{ foo = 1, bar = True } : { foo : Integer, bar : Bool }'
+{"foo":1,"bar":true}
+```
+
+Anything in Dhall can be imported from another file, including the type in a
+type annotation.  This means that you can save the type annotation to a file:
+
+```bash
+$ echo '{ foo : Integer, bar : Bool }' > schema.dhall
+```
+
+... and reference that file in a type annotation:
+
+```bash
+$ dhall-to-json <<< '{ foo = 1, bar = True } : ./schema.dhall'
+{"foo":1,"bar":true}
+```
+
+If the expression doesn't match the "schema" (i.e. the type annotation) then
+"validation fails" (i.e. you get a type error):
+
+```bash
+$ dhall-to-json <<< '{ foo = 1, baz = True } : ./schema.dhall'
+
+
+Error: Expression doesn't match annotation
+
+{ foo = 1, baz = True } : ./schema.dhall
+
+(stdin):1:1
+```
+
+> **Exercise:** Add the `--explain` flag to the above command to see why the
+> expression failed to validate against the schema.
+
 ## Variables
 
 Dhall also differs from JSON by offering some programming language features.
