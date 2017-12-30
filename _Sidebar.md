@@ -6,5 +6,7 @@
 * How-to guide
     * [[Cheatsheet|Cheatsheet]]
 * Reference
-    * [[Language standard|Language standard]]
+    * [Grammar](https://github.com/dhall-lang/dhall-lang/blob/master/standard/dhall.abnf)
+    * [Semantics](https://github.com/dhall-lang/dhall-lang/blob/master/standard/semantics.md)
     * [[Built in types, functions, and operators|Built in types, functions, and operators]]
+    * [Prelude](http://prelude.dhall-lang.org/)
