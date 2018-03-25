@@ -103,7 +103,7 @@
     ```haskell
     [] : List Integer, [ 1, 2, 3 ]
 
-    [ 1, 2, 3 ] ++ [ 4, 5, 6 ] = [ 1, 2, 3, 4, 5, 6 ]
+    [ 1, 2, 3 ] # [ 4, 5, 6 ] = [ 1, 2, 3, 4, 5, 6 ]
 
     List/build Integer (λ(list : Type) → λ(cons : Integer → list → list) → λ(nil : list) → cons 1 (cons 2 (cons 3 nil))) = [ 1, 2, 3 ] : List Integer
 
