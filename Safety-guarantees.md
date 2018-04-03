@@ -34,12 +34,12 @@ three ways to interact with the outside world, all of which are related to
 importing Dhall expression from external sources:
 
 * Importing expressions from a file path (absolute, relative, or home-anchored)
-* Importing expressions using an HTTP/HTTPS request to web service
+* Importing expressions using an HTTP/HTTPS request to a web service
 * Importing expressions from an environment variable
 
-Other than importing values, a Dhall configuration only computes a pure value
-used to configure some larger program.  The only other interaction with
-the outside world is mediated through that larger program.
+Other than importing values, a Dhall configuration file only computes a pure
+value used to configure some larger program.  The only other interactions with
+the outside world are mediated through that larger program.
 
 ## Code injection
 
