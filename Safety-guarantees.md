@@ -430,12 +430,12 @@ This is because `List/head` returns an `Optional` result which will be empty
 if the input list is empty.
 
 "Success" has a specific meaning in a total functional programming language.
-In this context, "success" means that a potentially empty result is not
-allowed where the type system expects a non-empty result.  Also, everything
-is non-empty by default: you have to explicitly opt in to handling potentially
-empty values.
+In this context, "success" means that a potentially empty or failed result is
+not allowed where the type system expects a successful result.  Also, everything
+is present by default: you have to explicitly opt in to handling potentially
+empty or failed values.
 
-For example, you add any two `Natural` numbers using the `+` operator:
+For example, you can add any two `Natural` numbers using the `+` operator:
 
 ```bash
 $ dhall <<< '+2 + 3'
@@ -463,7 +463,7 @@ specifying what do to if the value is absent, typically by using
 ```haskell
   λ(o : Optional Natural)
       -- Default `x` to `0` if `x` is absent
-→     let x = Optional/fold Natural o Natural (λ(n : Natural) → n) + 0
+→     let x = Optional/fold Natural o Natural (λ(n : Natural) → n) +0
 
   in  x + +3
 ```
@@ -480,8 +480,9 @@ program expects a configuration file of type:
 
 ... then the type system guarantees that none of those values will be absent
 since every type (such as `Integer` or `Text`) is automatically non-`Optional`
-by default.  Your configuration file has to explicitly opt in to `Optional`
-values and the type system polices your input for you.
+by default.  Your configuration file has to explicitly opt in to accepting
+empty or otherwise failed values and the type system then polices your input
+for you.
 
 ## Conclusions
 
