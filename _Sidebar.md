@@ -1,6 +1,7 @@
 * [[Home|Home]]
 * Discussion
     * [[Programmable configuration files|Programmable configuration files]]
+    * [[Safety guarantees|Safety guarantees]]
 * Tutorial
     * [[Getting started: Generate JSON or YAML|Getting started: Generate JSON or YAML]]
 * How-to guide
