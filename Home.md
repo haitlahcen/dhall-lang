@@ -28,6 +28,10 @@ These cookbooks teach you how to solve specific tasks:
 
     Ramp up quickly with a cheat sheet if you're already familiar with functional programming
 
+*   [[Frequently Asked Questions (FAQ)|Frequently Asked Questions (FAQ)]]
+
+    Common questions and workarounds for limitations of the language
+
 *   [[How to translate recursive code to Dhall|How to translate recursive code to Dhall]]
 
     Embed recursive data types and functions in a non-recursive language
