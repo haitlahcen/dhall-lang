@@ -1,4 +1,4 @@
-> Can I create a function with default values for function arguments?
+## Can I create a function with default values for function arguments?
 
 The Dhall configuration language does not provide language support for functions with default-valued arguments.  However, you can create records of default values that you can selectively override with new values using the `//` operator.
 
