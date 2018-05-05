@@ -32,6 +32,10 @@ These cookbooks teach you how to solve specific tasks:
 
     Common questions and workarounds for limitations of the language
 
+*   [[Migration: Swapped syntax for Natural numbers and Integers|Migration: Swapped syntax for Natural numbers and Integers]]
+
+    Migrate your code to support the change in syntax for `Natural` numbers and `Integer`s
+
 *   [[How to translate recursive code to Dhall|How to translate recursive code to Dhall]]
 
     Embed recursive data types and functions in a non-recursive language
