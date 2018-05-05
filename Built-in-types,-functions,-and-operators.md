@@ -38,6 +38,12 @@ Dhall language.
     * [`Optional`](#literals-optional)
     * [`Optional/fold`](#function-optionalfold)
     * [`Optional/build`](#function-optionalbuild)
+* [Records](#records)
+    * [Record types](#record-types)
+    * [Record values](#record-values)
+    * [`⩓`](#operator--8)
+    * [`∧`](#operator--9)
+    * [`⫽`](#operator--10)
 
 # `Bool`
 
@@ -1176,4 +1182,154 @@ Optional Text
 Optional/build t (Optional/fold t x) = x
 
 Optional/fold t (Optional/build t x) = x
+```
+
+# Records
+
+## Record types
+
+A record type is a sequence of 0 or more key-type pairs inside curly braces.
+
+### Examples
+
+```bash
+$ dhall <<< '{ foo : Integer, bar : Bool }'
+```
+```haskell
+Type
+
+{ foo : Integer, bar : Bool }
+```
+
+```bash
+$ dhall <<< '{}'
+```
+```haskell
+Type
+
+{}
+```
+
+### Rules
+
+```haskell
+{ k₀ : T₀, k₁ : T₁, k₂ : T₂, … } = { k₀ : T₀ } ⩓ { k₁ : T₁ } ⩓ { k₂ : T₂ } ⩓ …
+```
+
+## Record values
+
+A record value is a sequence of 0 or more key-value pairs inside curly braces.
+
+An empty record literal must have a single `=` sign between the curly braces to
+distinguish the empty record literal from the empty record type.
+
+### Examples
+
+```bash
+$ dhall <<< '{ foo = 1, bar = True }'
+```
+```haskell
+{ foo : Integer, bar : Bool }
+
+{ foo = 1, bar = True }
+```
+
+```bash
+$ dhall <<< '{=}'
+```
+```haskell
+{}
+
+{=}
+```
+
+### Rules
+
+```haskell
+{ k₀ = v₀, k₁ = v₁, k₂ = v₂, … } = { k₀ = v₀ } ∧ { k₁ = v₁ } ∧ { k₂ = v₂ } ∧ …
+```
+
+## Operator: `⩓`
+
+* ASCII: `//\\`
+* Unicode: U+2A53
+
+The `⩓` operator recursively merges record types
+
+### Example
+
+```bash
+$ dhall <<< '{ foo : { bar : Bool } } ⩓ { foo : { baz : Text }, qux : List Integer }'
+```
+```haskell
+Type
+
+{ foo : { bar : Bool, baz : Text }, qux : List Integer }
+```
+
+### Rules
+
+```haskell
+x ⩓ {} = x
+
+{} ⩓ x = x
+
+(x ⩓ y) ⩓ z = x ⩓ (y ⩓ z)
+```
+
+## Operator: `∧`
+
+* ASCII: `/\`
+* Unicode: U+2227
+
+The `∧` operator recursively merges record values
+
+### Example
+
+```bash
+$ dhall <<< '{ foo = { bar = True } } ∧ { foo = { baz = "ABC" }, qux = [1, 2, 3] }'
+```
+```haskell
+{ foo : { bar : Bool, baz : Text }, qux : List Integer }
+
+{ foo = { bar = True, baz = "ABC" }, qux = [ 1, 2, 3 ] }
+```
+
+### Rules
+
+```haskell
+x ∧ {=} = x
+
+{=} ∧ x = x
+
+(x ∧ y) ∧ z = x ∧ (y ∧ z)
+```
+
+## Operator: `⫽`
+
+* ASCII: `//`
+* Unicode: U+2AFD
+
+The `⫽` operator non-recursively merges record values, preferring fields from the right
+record when they conflict
+
+### Example
+
+```bash
+$ dhall <<< '{ foo = 1, bar = True } ⫽ { foo = 2 }'
+```
+```haskell
+{ foo : Integer, bar : Bool }
+
+{ foo = 2, bar = True }
+```
+
+### Rules
+
+```haskell
+x ⫽ {=} = x
+
+{=} ⫽ x = x
+
+(x ⫽ y) ⫽ z = x ⫽ (y ⫽ z)
 ```
