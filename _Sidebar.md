@@ -7,6 +7,7 @@
 * How-to guides
     * [[Cheatsheet|Cheatsheet]]
     * [[Frequently Asked Questions (FAQ)|Frequently Asked Questions (FAQ)]]
+    * [[Migration: Swapped syntax for Natural numbers and Integers|Migration: Swapped syntax for Natural numbers and Integers]]
     * [[How to translate recursive code to Dhall|How to translate recursive code to Dhall]]
 * References
     * [Grammar](https://github.com/dhall-lang/dhall-lang/blob/master/standard/dhall.abnf)
