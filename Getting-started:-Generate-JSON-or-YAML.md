@@ -615,7 +615,7 @@ $ dhall-to-json <<< '[1, 2, 3] # [4, 5, 6]'
 > }
 > ```
 
-## Unions
+## `Optional` values
 
 Dhall's type system will reject the following common JSON idiom:
 
@@ -638,109 +638,289 @@ JSON configurations often have lists of records, where different records will
 have different sets of fields defined.  Dhall rejects this because adding or
 removing a field from a record changes the record's type.
 
-Despite this restriction, we can still generate such JSON if we take advantage
-of Dhall's support for "unions".  You can think of a "union" as a value that can
-be one or more possible types.
+Despite this restriction, we still have a few options for generating the above
+JSON.  For example, you can make the `y` field `Optional` (i.e. the Dhall
+equivalent of a nullable value), like this:
+
+```haskell
+-- optional.dhall
+
+[ { x = 1, y = [] : Optional Natural }
+, { x = 2, y = [ 3 ] : Optional Natural }
+]
+```
+
+`Optional` values look just like lists except that they have at most 1 element
+and they have a mandatory type annotation.
+
+`dhall-to-json` by default converts an empty `Optional` value to `null`:
+
+```bash
+$ dhall-to-json <<< './optional.dhall'
+```
+```json
+[{"x":1,"y":null},{"x":2,"y":3}]
+```
+
+... but also provides a `--omitNull` flag that you can use to omit `null` fields
+from records, like this:
+
+```bash
+$ dhall-to-json --omitNull <<< './optional.dhall'
+```
+```json
+[{"x":1},{"x":2,"y":3}]
+```
+
+## Unions
+
+Sometimes JSON values might differ by more than just the presence or absence of
+a record field.  For example, this is valid JSON, too:
+
+```json
+[1,true]
+```
+
+We would get a type error if we were to naively translate the above JSON to Dhall:
+
+```bash
+$ dhall-to-json <<< '[ 1, True ]'
+
+
+Error: List elements should all have the same type
+
+- Natural
++ Bool
+
+True 
+
+(stdin):1:6
+```
+
+However, we can still generate such JSON if we take advantage of Dhall's support
+for "unions".  You can think of a "union" as a value that can be one or more
+possible types.
 
 For example, the equivalent Dhall configuration would be:
 
 ```haskell
-[ < OnlyX = { x = 1 } | Both : { x : Natural, y : Natural } >
-, < Both = { x = 2, y = 3 } | OnlyX : { x : Natural } >
-]
-```
+-- union.dhall
 
-... which generates this json:
-
-```json
-[
-    {
-        "x": 1
-    },
-    {
-        "x": 2,
-        "y": 3
-    }
+[ < Left = 1 | Right : Bool >
+, < Right = True | Left : Natural >
 ]
 ```
 
 Every union has multiple possible alternatives, each labeled by a tag.  For
 example, the union literals in the above Dhall configuration both had two
-alternatives labeled `OnlyX` and `Both`.
+alternatives labeled `Left` and `Right`.
 
 A union literal defines the value of exactly one alternative and only specifies
 the type of the remaining alternatives.  For example, the first union literal:
 
 ```haskell
-< OnlyX = { x = 1 } | Both : { x : Natural, y : Natural } >
+< Left = 1 | Right : Bool >
 ```
 
-... specified the value of the `OnlyX` alternative and specified the type of the
-`Both` alternative.  The second union literal:
+... specified the value of the `Left` alternative and specified the type of the
+`Right` alternative.  The second union literal:
 
 ```haskell
-< Both = { x = 2, y = 3 } | OnlyX : { x : Natural } >
+< Right = True | Left : Natural >
 ```
 
-... specified the value of the `Both` alternative and specified the type of the
-`OnlyX` alternative.
+... specified the value of the `Right` alternative and specified the type of the
+`Left` alternative.
 
 The `dhall-to-json` executable strips the tags when translating union literals
 to JSON.  This trick lets you bridge between strongly typed Dhall configuration
 files and their weakly typed JSON equivalents.
 
 As you add more alternatives and union literals they can get repetitive.
-Fortunately, you already have a tool to reduce repetition: functions!
+Fortunately, the language provides a `constructors` keyword to reduce this
+repetition.  Given a union type the `constructors` keyword will generate a
+record of constructors for each alternative of the union, like this:
 
-> **Exercise**: What JSON do you think this Dhall configuration file will
-> generate?
->
-> ```haskell
->     let Local =
->             λ(x : { relativePath : Text })
->           → < Local   = x
->             | GitHub  : { repository : Text, revision : Text }
->             | Hackage : { package : Text, version : Text }
->             >
-> 
-> in  let GitHub =
->             λ(x : { repository : Text, revision : Text })
->           → < GitHub  = x
->             | Hackage : { package : Text, version : Text }
->             | Local   : { relativePath : Text }
->             >
-> 
-> in  let Hackage =
->             λ(x : { package : Text, version : Text })
->           → < Hackage = x
->             | GitHub  : { repository : Text, revision : Text }
->             | Local   : { relativePath : Text }
->             >
-> 
-> in  [ GitHub
->       { repository = "https://github.com/Gabriel439/Haskell-Turtle-Library.git"
->       , revision   = "ae5edf227b515b34c1cb6c89d9c58ea0eece12d5"
->       }
->     , Local { relativePath = "~/proj/optparse-applicative" }
->     , Local { relativePath = "~/proj/discrimination" }
->     , Hackage { package = "lens", version = "4.15.4" }
->     , GitHub
->       { repository = "https://github.com/haskell/text.git"
->       , revision   = "ccbfabedea1cf5b38ff19f37549feaf01225e537"
->       }
->     , Local { relativePath = "~/proj/servant-swagger" }
->     , Hackage { package = "aeson", version = "1.2.3.0" }
->     ]
-> ```
->
-> Test your guess!
+```haskell
+-- constructors.dhall
+    let Package =
+          < Local :
+              { relativePath : Text }
+          | GitHub :
+              { repository : Text, revision : Text }
+          | Hackage :
+              { package : Text, version : Text }
+          >
 
-> **Exercise:** Create a Dhall configuration file that generates the following
-> JSON:
->
-> ```json
-> [1,true]
-> ```
+in  let package = constructors Package
+
+in  [ package.GitHub
+      { repository =
+          "https://github.com/Gabriel439/Haskell-Turtle-Library.git"
+      , revision =
+          "ae5edf227b515b34c1cb6c89d9c58ea0eece12d5"
+      }
+    , package.Local { relativePath = "~/proj/optparse-applicative" }
+    , package.Local { relativePath = "~/proj/discrimination" }
+    , package.Hackage { package = "lens", version = "4.15.4" }
+    , package.GitHub
+      { repository =
+          "https://github.com/haskell/text.git"
+      , revision =
+          "ccbfabedea1cf5b38ff19f37549feaf01225e537"
+      }
+    , package.Local { relativePath = "~/proj/servant-swagger" }
+    , package.Hackage { package = "aeson", version = "1.2.3.0" }
+    ]
+```
+
+... which generates the following JSON stripped of the constructors:
+
+```json
+[
+    {
+        "repository": "https://github.com/Gabriel439/Haskell-Turtle-Library.git",
+        "revision": "ae5edf227b515b34c1cb6c89d9c58ea0eece12d5"
+    },
+    {
+        "relativePath": "~/proj/optparse-applicative"
+    },
+    {
+        "relativePath": "~/proj/discrimination"
+    },
+    {
+        "version": "4.15.4",
+        "package": "lens"
+    },
+    {
+        "repository": "https://github.com/haskell/text.git",
+        "revision": "ccbfabedea1cf5b38ff19f37549feaf01225e537"
+    },
+    {
+        "relativePath": "~/proj/servant-swagger"
+    },
+    {
+        "version": "1.2.3.0",
+        "package": "aeson"
+    }
+]
+```
+
+We can understand better how this works by giving an explicit type
+signature to the `packages` record:
+
+```haskell
+    …
+
+in  let package
+        : { Local :
+              { relativePath : Text } → Package
+          , GitHub :
+              { repository : Text, revision : Text } → Package
+          , Hackage :
+              { package : Text, version : Text } → Package
+          }
+        = constructors Package
+
+in  …
+```
+
+The `package` record contains one field per alternative of the `Package` type.
+Each field contains a function that converts the corresponding type of alternative
+into a `Package`.
+
+## Dynamic records
+
+Some programs expect JSON records with a dynamically computed set of fields.  For
+example, you might require a list of students to be represented by the following
+sample JSON:
+
+```json
+{
+    "aiden": {
+        "age": 16
+    },
+    "daniel": {
+        "age": 17
+    },
+    "rebecca": {
+        "age": 17
+    }
+}
+```
+
+You can't use a Dhall record to store the above students because then the type of
+the record would change every time you add or remove a student.
+
+The idiomatic way to encode the above information in Dhall is to use an "association
+list" (i.e. a list of key-value pairs), like this:
+
+```haskell
+-- students.dhall
+
+[ { mapKey = "daniel", mapValue = { age = 17 } }
+, { mapKey = "rebecca", mapValue = { age = 17 } }
+, { mapKey = "aiden", mapValue = { age = 16 } }
+]
+```
+
+... and the `dhall-to-json` executable automatically detects any association list
+that uses the field names `mapKey` and `mapValue` and converts that to the
+equivalent dynamic JSON record:
+
+```bash
+$ dhall-to-json --pretty <<< './students.dhall'
+```
+```json
+{
+    "aiden": {
+        "age": 16
+    },
+    "daniel": {
+        "age": 17
+    },
+    "rebecca": {
+        "age": 17
+    }
+}
+```
+
+This ensures that  the schema of your Dhall configuration stays the same
+but you can still generate JSON records with a dynamically computed set of
+fields.
+
+You have the option to disable this feature if you want using the `--noMaps`
+flag:
+
+```bash
+$ dhall-to-json --pretty --noMaps <<< './students.dhall'
+```
+```json
+[
+    {
+        "mapKey": "daniel",
+        "mapValue": {
+            "age": 17
+        }
+    },
+    {
+        "mapKey": "rebecca",
+        "mapValue": {
+            "age": 17
+        }
+    },
+    {
+        "mapKey": "aiden",
+        "mapValue": {
+            "age": 16
+        }
+    }
+]
+```
+
+... or you can specify a different set of field names to reserve using the
+`--key` and `--value` options if you don't want to reserve the names
+`mapKey` and `mapValue`.
 
 ## YAML
 
