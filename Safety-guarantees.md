@@ -169,12 +169,12 @@ Natural/even ./number.dhall
 ```haskell
 -- ./number.dhall
 
-+4
+4
 ```
 
 We cannot protect the `./bool.dhall` import using a textual hash of the file
 because the configuration file's result could still change if we modify the
-`./number.dhall` file to store a new value (like `+5`).  Modifications to
+`./number.dhall` file to store a new value (like `5`).  Modifications to
 `./number.dhall` would go undetected because they would not disturb the textual
 hash of `./bool.dhall`.
 
@@ -438,10 +438,10 @@ empty or failed values.
 For example, you can add any two `Natural` numbers using the `+` operator:
 
 ```bash
-$ dhall <<< '+2 + 3'
+$ dhall <<< '2 + 3'
 ```
 ```haskell
-+5
+5
 ```
 
 ... but you can not add an `Optional Natural` number to a `Natural` number.
@@ -449,7 +449,7 @@ You will get a type error if you try to do so, such as in the following
 anonymous function:
 
 ```haskell
-λ(x : Optional Natural) → x + +3  -- Type error
+λ(x : Optional Natural) → x + 3  -- Type error
 ```
 
 This is automatically an error even if you have not yet called the function
@@ -463,9 +463,9 @@ specifying what do to if the value is absent, typically by using
 ```haskell
   λ(o : Optional Natural)
       -- Default `x` to `0` if `x` is absent
-→     let x = Optional/fold Natural o Natural (λ(n : Natural) → n) +0
+→     let x = Optional/fold Natural o Natural (λ(n : Natural) → n) 0
 
-  in  x + +3
+  in  x + 3
 ```
 
 This benefit also applies to your configuration file's schema.  If your
