@@ -18,6 +18,12 @@ records and functions.
 
 ## Installation
 
+> **NOTE**: This tutorial assumes that you are using version 1.2.0 or later
+> of the `dhall-json` package.  Some of the following examples will not
+> work correctly for older versions of the package.  For more details, see:
+>
+> [[Migration: Swapped syntax for Natural numbers and Integers|Migration: Swapped syntax for Natural numbers and Integers]]
+
 You will need to install the `dhall-json` package, which provides both the
 `dhall-to-json` and `dhall-to-yaml` executables.  The following sections
 provide recommended installation instructions for Windows, OS X, and Linux
@@ -200,11 +206,14 @@ elements of the same type:
 ```bash
 $ dhall-to-json <<< '[ 1, True ]'
 
-Error: List elements should have the same type
+Error: List elements should all have the same type
 
-[ 1, True ]
+- Natural
++ Bool
 
-(stdin):1:1
+True 
+
+(stdin):1:6
 ```
 
 The error messages are terse by default, but if you check the `--help` output
@@ -235,7 +244,7 @@ Dhall also supports type annotations, which are the Dhall analog of a JSON
 schema.  For example:
 
 ```bash
-$ dhall-to-json <<< '{ foo = 1, bar = True } : { foo : Integer, bar : Bool }'
+$ dhall-to-json <<< '{ foo = 1, bar = True } : { foo : Natural, bar : Bool }'
 {"foo":1,"bar":true}
 ```
 
@@ -243,7 +252,7 @@ Anything in Dhall can be imported from another file, including the type in a
 type annotation.  This means that you can save the type annotation to a file:
 
 ```bash
-$ echo '{ foo : Integer, bar : Bool }' > schema.dhall
+$ echo '{ foo : Natural, bar : Bool }' > schema.dhall
 ```
 
 ... and reference that file in a type annotation:
@@ -262,7 +271,13 @@ $ dhall-to-json <<< '{ foo = 1, baz = True } : ./schema.dhall'
 
 Error: Expression doesn't match annotation
 
+{ - bar : …
+, + baz : …
+, …
+}
+
 { foo = 1, baz = True } : ./schema.dhall
+
 
 (stdin):1:1
 ```
@@ -397,16 +412,16 @@ Unicode on your computer by following these instructions:
 * `→` (U+2192)
 
 For example, here is an anonymous function that takes a single argument named
-`x` of type `Integer` and returns a list of two `x`s:
+`x` of type `Natural` and returns a list of two `x`s:
 
 ```haskell
-λ(x : Integer) → [x, x]
+λ(x : Natural) → [x, x]
 ```
 
 You can apply an anonymous function directly to an argument like this:
 
 ```bash
-$ dhall-to-json <<< '(λ(x : Integer) → [x, x]) 2'
+$ dhall-to-json <<< '(λ(x : Natural) → [x, x]) 2'
 ```
 ```json
 [2,2]
@@ -416,7 +431,7 @@ More commonly, you'll use a `let` expression to give the function a name and
 then use that name to apply the function to an argument:
 
 ```bash
-$ dhall-to-json <<< 'let twice = λ(x : Integer) → [x, x] in twice 2'
+$ dhall-to-json <<< 'let twice = λ(x : Natural) → [x, x] in twice 2'
 ```
 ```json
 [2,2]
@@ -464,7 +479,7 @@ $ dhall-to-json <<< 'let twice = λ(x : Integer) → [x, x] in twice 2'
 You can nest anonymous functions to create a function of multiple arguments:
 
 ```bash
-$ dhall-to-json <<< 'let both = λ(x : Integer) → λ(y : Integer) → [x, y] in both 1 2'
+$ dhall-to-json <<< 'let both = λ(x : Natural) → λ(y : Natural) → [x, y] in both 1 2'
 ```
 ```json
 [1,2]
@@ -608,11 +623,15 @@ Dhall's type system will reject the following common JSON idiom:
 $ dhall-to-json <<< '[ { x = 1 }, { x = 2, y = 3 } ]'
 
 
-Error: List elements should have the same type
+Error: List elements should all have the same type
 
-[ { x = 1 }, { x = 2, y = 3 } ]
+{ + y : …
+, …
+}
 
-(stdin):1:1
+{ x = 2, y = 3 } 
+
+(stdin):1:14
 ```
 
 JSON configurations often have lists of records, where different records will
@@ -626,8 +645,8 @@ be one or more possible types.
 For example, the equivalent Dhall configuration would be:
 
 ```haskell
-[ < OnlyX = { x = 1 } | Both : { x : Integer, y : Integer } >
-, < Both = { x = 2, y = 3 } | OnlyX : { x : Integer } >
+[ < OnlyX = { x = 1 } | Both : { x : Natural, y : Natural } >
+, < Both = { x = 2, y = 3 } | OnlyX : { x : Natural } >
 ]
 ```
 
@@ -653,14 +672,14 @@ A union literal defines the value of exactly one alternative and only specifies
 the type of the remaining alternatives.  For example, the first union literal:
 
 ```haskell
-< OnlyX = { x = 1 } | Both : { x : Integer, y : Integer } >
+< OnlyX = { x = 1 } | Both : { x : Natural, y : Natural } >
 ```
 
 ... specified the value of the `OnlyX` alternative and specified the type of the
 `Both` alternative.  The second union literal:
 
 ```haskell
-< Both = { x = 2, y = 3 } | OnlyX : { x : Integer } >
+< Both = { x = 2, y = 3 } | OnlyX : { x : Natural } >
 ```
 
 ... specified the value of the `Both` alternative and specified the type of the
