@@ -98,7 +98,7 @@ True
 $ dhall <<< 'if True then 3 else 5'
 ```
 ```haskell
-Integer
+Natural
 
 3
 ```
@@ -288,30 +288,30 @@ Natural : Type
 
 ## Literals: `Natural`
 
-A `Natural` number literal is a non-negative integer prefixed with a `+` sign.
+A `Natural` number literal is an unsigned non-negative integer
 
 ### Example
 
 ```bash
-$ dhall <<< '+2'
+$ dhall <<< '2'
 ```
 ```haskell
 Natural
 
-+2
+2
 ```
 
 ### Type
 
 ```
 ────────────────
-Γ ⊢ +n : Natural
+Γ ⊢ n : Natural
 ```
 
 ### Rules
 
 ```haskell
-+n = +1 + +1 + … + +1 + +1  -- n times
+n = 1 + 1 + … + 1 + 1  -- n times
 ```
 
 ## Operator: `+`
@@ -319,12 +319,12 @@ Natural
 ### Example
 
 ```bash
-$ dhall <<< '+2 + +3'
+$ dhall <<< '2 + 3'
 ```
 ```haskell
 Natural
 
-+5
+5
 ```
 
 ### Type
@@ -338,9 +338,9 @@ Natural
 ### Rules
 
 ```haskell
-x + +0 = x
+x + 0 = x
 
-+0 + x = x
+0 + x = x
 
 (x + y) + z = x + (y + z)
 ```
@@ -350,12 +350,12 @@ x + +0 = x
 ### Example
 
 ```bash
-$ dhall <<< '+2 * +3'
+$ dhall <<< '2 * 3'
 ```
 ```haskell
 Natural
 
-+6
+6
 ```
 
 ### Type
@@ -369,15 +369,15 @@ Natural
 ### Rules
 
 ```haskell
-x * +1 = x
+x * 1 = x
 
-+1 * x = x
+1 * x = x
 
 (x * y) * z = x * (y * z)
 
-x * +0 = +0
+x * 0 = 0
 
-+0 * x = +0
+0 * x = 0
 
 (x + y) * z = (x * z) + (y * z)
 
@@ -389,7 +389,7 @@ x * (y + z) = (x * y) + (x * z)
 ### Example
 
 ```bash
-$ dhall <<< 'Natural/even +6'
+$ dhall <<< 'Natural/even 6'
 ```
 ```haskell
 Bool
@@ -407,11 +407,11 @@ True
 ### Rules
 
 ```haskell
-Natural/even +0 = True
+Natural/even 0 = True
 
 Natural/even (x + y) = Natural/even x == Natural/even y
 
-Natural/even +1 = False
+Natural/even 1 = False
 
 Natural/even (x * y) = Natural/even x || Natural/even y
 ```
@@ -421,7 +421,7 @@ Natural/even (x * y) = Natural/even x || Natural/even y
 ### Example
 
 ```bash
-$ dhall <<< 'Natural/odd +6'
+$ dhall <<< 'Natural/odd 6'
 ```
 ```haskell
 Bool
@@ -439,11 +439,11 @@ False
 ### Rules
 
 ```haskell
-Natural/odd +0 = False
+Natural/odd 0 = False
 
 Natural/odd (x + y) = Natural/odd x != Natural/odd y
 
-Natural/odd +1 = True
+Natural/odd 1 = True
 
 Natural/odd (x * y) = Natural/odd x && Natural/odd y
 ```
@@ -453,7 +453,7 @@ Natural/odd (x * y) = Natural/odd x && Natural/odd y
 ### Example
 
 ```bash
-$ dhall <<< 'Natural/isZero + 6'
+$ dhall <<< 'Natural/isZero 6'
 ```
 ```haskell
 Bool
@@ -471,11 +471,11 @@ False
 ### Rules
 
 ```haskell
-Natural/isZero +0 = True
+Natural/isZero 0 = True
 
 Natural/isZero (x + y) = Natural/isZero x && Natural/isZero y
 
-Natural/isZero +1 = False
+Natural/isZero 1 = False
 
 Natural/isZero (x * y) = Natural/isZero x || Natural/isZero y
 ```
@@ -485,7 +485,7 @@ Natural/isZero (x * y) = Natural/isZero x || Natural/isZero y
 ### Example
 
 ```bash
-$ dhall <<< 'Natural/fold +40 Text (λ(t : Text) → t ++ "!") "Hello"'
+$ dhall <<< 'Natural/fold 40 Text (λ(t : Text) → t ++ "!") "Hello"'
 ```
 ```haskell
 Text
@@ -503,11 +503,11 @@ Text
 ### Rules
 
 ```haskell
-Natural/fold +0 n s z = z
+Natural/fold 0 n s z = z
 
 Natural/fold (x + y) n s z = Natural/fold x n s (Natural/fold y n s z)
 
-Natural/fold +1 n s = s
+Natural/fold 1 n s = s
 
 Natural/fold (x * y) n s = Natural/fold x n (Natural/fold y n s)
 ```
@@ -522,7 +522,7 @@ $ dhall <<< 'Natural/build (λ(natural : Type) → λ(succ : natural → natural
 ```haskell
 Natural
 
-+2
+2
 ```
 
 ### Type
@@ -562,18 +562,18 @@ Integer
 
 ## Literals: `Integer`
 
-An `Integer` literal is a either a non-negative integer (without a `+` sign) or
+An `Integer` literal is a either a non-negative integer prefixed with a `+` or
 a negative integer prefixed with a `-`.
 
 ### Examples
 
 ```bash
-$ dhall <<< '3'
+$ dhall <<< '+3'
 ```
 ```haskell
 Integer
 
-3
++3
 ```
 
 ```bash
@@ -589,7 +589,7 @@ Integer
 
 ```
 ────────────────
-Γ ⊢ n : Integer
+Γ ⊢ ±n : Integer
 ```
 
 # `Double`
@@ -771,18 +771,18 @@ An empty `List` literal must end with a type annotation.
 $ dhall <<< '[ 1, 2, 3 ]'
 ```
 ```haskell
-List Integer
+List Natural
 
 [ 1, 2, 3 ]
 ```
 
 ```bash
-dhall <<< '[] : List Integer'
+dhall <<< '[] : List Natural'
 ```
 ```haskell
-List Integer
+List Natural
 
-[] : List Integer
+[] : List Natural
 ```
 
 ### Type
@@ -807,7 +807,7 @@ List Integer
 $ dhall <<< '[ 1, 2, 3] # [ 4, 5, 6 ]'
 ```
 ```haskell
-List Integer
+List Natural
 
 [ 1, 2, 3, 4, 5, 6, ]
 ```
@@ -865,12 +865,12 @@ List/fold a ([x] : List a) b c = c x
 ### Example
 
 ```bash
-$ dhall <<< 'List/build Integer (λ(list : Type) → λ(cons : Integer → list → list) → λ(nil : list) → cons 1 (cons 2 (cons 3 nil)))'
+$ dhall <<< 'List/build Natural (λ(list : Type) → λ(cons : Natural → list → list) → λ(nil : list) → cons 1 (cons 2 (cons 3 nil)))'
 ```
 ```haskell
-List Integer
+List Natural
 
-[1, 2, 3] : List Integer
+[1, 2, 3] : List Natural
 ```
 
 ### Type
@@ -893,12 +893,12 @@ List/fold t (List/build t x) = x
 ### Example
 
 ```bash
-$ dhall <<< 'List/length Integer [ 1, 2, 3 ]'
+$ dhall <<< 'List/length Natural [ 1, 2, 3 ]'
 ```
 ```haskell
 Natural
 
-+3
+3
 ```
 
 ### Type
@@ -911,22 +911,22 @@ Natural
 ### Rules
 
 ```haskell
-List/length t ([] : List t) = +0
+List/length t ([] : List t) = 0
 
 List/length t (xs # ys) = List/length t xs + List/length t ys
 
-List/length t [ x ] = +1
+List/length t [ x ] = 1
 ```
 
 ### Function: `List/head`
 
 ```bash
-$ dhall <<< 'List/head Integer [ 1, 2, 3 ]'
+$ dhall <<< 'List/head Natural [ 1, 2, 3 ]'
 ```
 ```haskell
-Optional Integer
+Optional Natural
 
-[ 1 ] : Optional Integer
+[ 1 ] : Optional Natural
 ```
 
 ### Type
@@ -957,12 +957,12 @@ List/head a [ x ] = [ x ] : Optional a
 ### Example
 
 ```bash
-$ dhall <<< 'List/last Integer [ 1, 2, 3 ]'
+$ dhall <<< 'List/last Natural [ 1, 2, 3 ]'
 ```
 ```haskell
-Optional Integer
+Optional Natural
 
-[ 3 ] : Optional Integer
+[ 3 ] : Optional Natural
 ```
 
 ### Type
@@ -998,7 +998,7 @@ $ dhall <<< 'List/indexed Text [ "ABC", "DEF", "GHI" ]'
 ```haskell
 List { index : Natural, value : Text }
 
-[{ index = +0, value = "ABC" }, { index = +1, value = "DEF" }, { index = +2, value = "GHI" }] : List { index : Natural, value : Text }
+[{ index = 0, value = "ABC" }, { index = 1, value = "DEF" }, { index = 2, value = "GHI" }] : List { index : Natural, value : Text }
 ```
 
 ### Type
@@ -1036,7 +1036,7 @@ List/indexed a (xs # ys) =
             )
   in  combine a (List/indexed a xs) (List/indexed a ys)
 
-List/indexed a [ x ] = [ { index = +0, value = x } ]
+List/indexed a [ x ] = [ { index = 0, value = x } ]
 ```
 
 ## Function: `List/reverse`
@@ -1044,12 +1044,12 @@ List/indexed a [ x ] = [ { index = +0, value = x } ]
 ### Example
 
 ```bash
-$ dhall <<< 'List/reverse Integer [ 1, 2, 3 ]'
+$ dhall <<< 'List/reverse Natural [ 1, 2, 3 ]'
 ```
 ```haskell
-List Integer
+List Natural
 
-[ 3, 2, 1 ] : List Integer
+[ 3, 2, 1 ] : List Natural
 ```
 
 ### Type
@@ -1097,21 +1097,21 @@ a type annotation
 ### Example
 
 ```bash
-$ dhall <<< '[] : Optional Integer'
+$ dhall <<< '[] : Optional Natural'
 ```
 ```haskell
-Optional Integer
+Optional Natural
 
-[] : Optional Integer
+[] : Optional Natural
 ```
 
 ```bash
-$ dhall <<< '[ 1 ] : Optional Integer'
+$ dhall <<< '[ 1 ] : Optional Natural'
 ```
 ```haskell
-Optional Integer
+Optional Natural
 
-[ 1 ] : Optional Integer
+[ 1 ] : Optional Natural
 ```
 
 ### Type
@@ -1193,12 +1193,12 @@ A record type is a sequence of 0 or more key-type pairs inside curly braces.
 ### Examples
 
 ```bash
-$ dhall <<< '{ foo : Integer, bar : Bool }'
+$ dhall <<< '{ foo : Natural, bar : Bool }'
 ```
 ```haskell
 Type
 
-{ foo : Integer, bar : Bool }
+{ foo : Natural, bar : Bool }
 ```
 
 ```bash
@@ -1229,7 +1229,7 @@ distinguish the empty record literal from the empty record type.
 $ dhall <<< '{ foo = 1, bar = True }'
 ```
 ```haskell
-{ foo : Integer, bar : Bool }
+{ foo : Natural, bar : Bool }
 
 { foo = 1, bar = True }
 ```
@@ -1259,12 +1259,12 @@ The `⩓` operator recursively merges record types
 ### Example
 
 ```bash
-$ dhall <<< '{ foo : { bar : Bool } } ⩓ { foo : { baz : Text }, qux : List Integer }'
+$ dhall <<< '{ foo : { bar : Bool } } ⩓ { foo : { baz : Text }, qux : List Natural }'
 ```
 ```haskell
 Type
 
-{ foo : { bar : Bool, baz : Text }, qux : List Integer }
+{ foo : { bar : Bool, baz : Text }, qux : List Natural }
 ```
 
 ### Rules
@@ -1290,7 +1290,7 @@ The `∧` operator recursively merges record values
 $ dhall <<< '{ foo = { bar = True } } ∧ { foo = { baz = "ABC" }, qux = [1, 2, 3] }'
 ```
 ```haskell
-{ foo : { bar : Bool, baz : Text }, qux : List Integer }
+{ foo : { bar : Bool, baz : Text }, qux : List Natural }
 
 { foo = { bar = True, baz = "ABC" }, qux = [ 1, 2, 3 ] }
 ```
@@ -1319,7 +1319,7 @@ record when they conflict
 $ dhall <<< '{ foo = 1, bar = True } ⫽ { foo = 2 }'
 ```
 ```haskell
-{ foo : Integer, bar : Bool }
+{ foo : Natural, bar : Bool }
 
 { foo = 2, bar = True }
 ```
