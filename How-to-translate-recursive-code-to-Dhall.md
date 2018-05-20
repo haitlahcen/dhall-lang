@@ -210,7 +210,7 @@ in  let example
 
 in  let toNatural
         : Nat → Natural
-        = λ(x : Nat) → x Natural +0 (λ(n : Natural) → +1 + n)
+        = λ(x : Nat) → x Natural 0 (λ(n : Natural) → 1 + n)
 
 in  let result : Natural = toNatural example
 
@@ -223,13 +223,13 @@ in  result
 $ dhall <<< './example1.dhall'
 Natural
 
-+3
+3
 ```
 
 Like before, our recursive `toNatural` function is performing substitution by:
 
 *   replacing every occurrence of `Nat` with `Natural`
-*   replacing every occurrence of `Zero` with `+0`
+*   replacing every occurrence of `Zero` with `0`
 *   replacing every occurrence of `Succ` with an anonymous funciton
 
 ... which means that we could have equivalently written:
@@ -237,9 +237,9 @@ Like before, our recursive `toNatural` function is performing substitution by:
 ```haskell
     let Nat = Natural
 
-in  let Zero : Nat = +0
+in  let Zero : Nat = 0
 
-in  let Succ : Nat → Nat = λ(n : Nat) → +1 + n
+in  let Succ : Nat → Nat = λ(n : Nat) → 1 + n
 
 in  let result : Nat = Succ (Succ (Succ Zero))
 
@@ -309,9 +309,9 @@ in  let oddToNatural
           → o
             Natural
             Natural
-            +0
-            (λ(n : Natural) → +1 + n)
-            (λ(n : Natural) → +1 + n)
+            0
+            (λ(n : Natural) → 1 + n)
+            (λ(n : Natural) → 1 + n)
 
 in  let result = oddToNatural example
 
@@ -324,7 +324,7 @@ in  result
 $ dhall <<< './example2.dhall' 
 Natural
 
-+3
+3
 ```
 
 The trick here is that the Dhall's `Odd` type combines both of the Haskell
@@ -338,9 +338,9 @@ by:
 
 *   replacing every occurrence of `Even` with `Natural`
 *   replacing every occurrence of `Odd` with `Natural`
-*   replacing every occurrence of `Zero` with `+0`
-*   replacing every occurrence of `SuccEven` with an anonymous funciton
-*   replacing every occurrence of `SuccOdd` with an anonymous funciton
+*   replacing every occurrence of `Zero` with `0`
+*   replacing every occurrence of `SuccEven` with an anonymous function
+*   replacing every occurrence of `SuccOdd` with an anonymous function
 
 ... which means that we could have equivalently written:
 
@@ -349,11 +349,11 @@ by:
 
 in  let Even : Type = Natural
 
-in  let Zero : Even = +0
+in  let Zero : Even = 0
 
-in  let SuccEven : Odd → Even = λ(n : Odd) → +1 + n
+in  let SuccEven : Odd → Even = λ(n : Odd) → 1 + n
 
-in  let SuccOdd : Even → Odd = λ(n : Even) → +1 + n
+in  let SuccOdd : Even → Odd = λ(n : Even) → 1 + n
 
 in  let result = SuccOdd (SuccEven (SuccOdd Zero))
 
