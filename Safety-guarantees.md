@@ -50,7 +50,7 @@ The following configuration file is a valid Dhall expression that:
 * imports a type from a relative file located at `./schema.dhall`
 
 ```haskell
-    let concatSep = http://prelude.dhall-lang.org/Prelude/Text/concatSep
+    let concatSep = http://prelude.dhall-lang.org/Text/concatSep
 
 in  { name = env:USER as Text
     , age  = 23
@@ -75,7 +75,7 @@ command-line interpreter named `dhall` to retrieve, type-check, and remove all
 indirection in the expression, like this:
 
 ```bash
-$ dhall <<< 'http://prelude.dhall-lang.org/Prelude/Text/concatSep'
+$ dhall <<< 'http://prelude.dhall-lang.org/Text/concatSep'
 ```
 
 ```haskell
@@ -119,7 +119,7 @@ If you understand and trust what you see then you can freeze the import using
 an integrity check.  If you replace the `dhall` command with `dhall-hash`:
 
 ```haskell
-$ dhall-hash <<< 'http://prelude.dhall-lang.org/Prelude/Text/concatSep'
+$ dhall-hash <<< 'http://prelude.dhall-lang.org/Text/concatSep'
 ```
 
 ```
@@ -274,11 +274,11 @@ https://example.com/list.dhall
 ... and the expression hosted there is:
 
 ```haskell
-[ 1, 2, ./integer.dhall ]
+[ 1, 2, ./natural.dhall ]
 ```
 
-... then the interpreter will expand `./integer.dhall` to
-`https://example.com/integer.dhall`.  This feature allows expressions with
+... then the interpreter will expand `./natural.dhall` to
+`https://example.com/natural.dhall`.  This feature allows expressions with
 relative imports to continue to function when hosted from a web service.
 
 However, this feature also requires support for automatically forwarding any
@@ -420,10 +420,10 @@ return a useful result.  For example, the following expression succeeds, but
 returns an empty value:
 
 ```bash
-$ dhall <<< 'List/head Integer ([] : List Integer)'
+$ dhall <<< 'List/head Natural ([] : List Natural)'
 ```
 ```haskell
-[] : Optional Integer
+[] : Optional Natural
 ```
 
 This is because `List/head` returns an `Optional` result which will be empty
@@ -473,13 +473,13 @@ program expects a configuration file of type:
 
 ```haskell
 { name : Text
-, age : Integer
+, age : Natural
 , hobbies : Text
 }
 ```
 
 ... then the type system guarantees that none of those values will be absent
-since every type (such as `Integer` or `Text`) is automatically non-`Optional`
+since every type (such as `Natural` or `Text`) is automatically non-`Optional`
 by default.  Your configuration file has to explicitly opt in to accepting
 empty or otherwise failed values and the type system then polices your input
 for you.
