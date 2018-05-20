@@ -12,7 +12,7 @@ These posts explain the context and motivation behind the language:
 
     Study how Dhall configuration files provide programming language features without sacrificing safety
 
-*.  [[Dhall in production|Dhall in production]]
+*   [[Dhall in production|Dhall in production]]
 
     Example commercial use cases for Dhall
 
