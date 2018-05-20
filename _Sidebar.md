@@ -2,6 +2,7 @@
 * Discussion
     * [[Programmable configuration files|Programmable configuration files]]
     * [[Safety guarantees|Safety guarantees]]
+    * [[Dhall in production|Dhall in production]]
 * Tutorials
     * [[Getting started: Generate JSON or YAML|Getting started: Generate JSON or YAML]]
 * How-to guides
