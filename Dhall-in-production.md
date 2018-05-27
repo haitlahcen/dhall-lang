@@ -6,7 +6,7 @@ Uses Haskell bindings to Dhall to simplify redundant appliance cluster configura
 
 ## [CircuitHub](https://circuithub.com/)
 
-Uses `dhall-to-cabal` to simplify redundant `.cabal` files
+Uses Dhall to configure command-line applications (i.e. as an alternative to a JSON configuration)
 
 ## [IOHK](https://iohk.io/)
 
