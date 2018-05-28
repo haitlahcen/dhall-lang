@@ -31,7 +31,7 @@ A programmable configuration language can protect against this by evaluating
 code within a secure sandbox that only permits a blessed set of effects.  For
 example, the Dhall language is not a general purpose language and only supports
 three ways to interact with the outside world, all of which are related to
-importing Dhall expression from external sources:
+importing Dhall expressions from external sources:
 
 * Importing expressions from a file path (absolute, relative, or home-anchored)
 * Importing expressions using an HTTP/HTTPS request to a web service
