@@ -1,3 +1,59 @@
+## Imports relative to my top-level file are not working
+
+All top-level imports are relative to the current working directory.  For example, if you
+have a file located at `./foo/bar.dhall` that tries to import `./foo/baz.dhall` via a
+relative import:
+
+```bash
+$ cat ./foo/bar.dhall
+```
+```haskell
+./baz.dhall
+```
+```bash
+$ cat ./foo/baz.dhall
+```
+```haskell
+1
+```
+
+... that relative import will not work correctly if you feed that file to a Dhall
+interpreter via standard input:
+
+```bash
+$ dhall < ./foo/bar.dhall
+↳ ./baz.dhall
+
+Error: Missing file ./baz.dhall
+```
+
+This is because the interpreter does not know that the string fed in via standard
+input originally came from `./foo/bar.dhall`.  Therefore, the interpreter cannot
+process the relative import correctly.
+
+However, the relative import does work correctly if you feed a Dhall program
+importing that file to standard input, like this:
+
+```bash
+$ echo './foo/bar.dhall' | dhall
+```
+```haskell
+Natural
+
+1
+```
+
+In Bash, you can shorten this to:
+
+```bash
+$ dhall <<< './foo/bar.dhall'
+```
+```haskell
+Natural
+
+1
+```
+
 ## Can I create a function with default values for function arguments?
 
 The Dhall configuration language does not provide language support for functions with default-valued arguments.  However, you can create records of default values that you can selectively override with new values using the `//` operator.
