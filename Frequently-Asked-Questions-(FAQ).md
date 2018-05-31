@@ -54,6 +54,29 @@ Natural
 1
 ```
 
+## Why can't I use a type alias on an empty List?
+
+In practice, this would not work:
+
+```haskell
+   let genericRecord = List { mapKey : Text, mapValue : Text }
+in ([] : genericRecord)
+```
+
+Instead, you have to do this:
+```haskell
+   let genericRecord = { mapKey : Text, mapValue : Text }
+in ([] : List genericRecord)
+```
+
+The reason for this is that the type annotation for empty lists is not a real type annotation. It's actually part of the grammar:
+
+```haskell
+Syntax
+↓↓↓↓↓↓↓↓↓
+[] : List ElementType
+```
+
 ## Can I create a function with default values for function arguments?
 
 The Dhall configuration language does not provide language support for functions with default-valued arguments.  However, you can create records of default values that you can selectively override with new values using the `//` operator.
