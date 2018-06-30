@@ -12,3 +12,6 @@ Uses Dhall to configure command-line applications (i.e. as an alternative to a J
 
 Uses `dhall-to-yaml` to simplify redundant runtime configuration
 
+## [KSF Media](https://github.com/KSF-Media)
+
+Uses `dhall-kubernetes`, `dhall-to-yaml` and `dhall-to-text` to configure, modularize and template Terraform and Kubernetes configurations
