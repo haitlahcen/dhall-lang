@@ -59,7 +59,7 @@ Run the following commands to install the `dhall-json` package using the Nix
 package manager:
 
 ```bash
-$ nix-env --install --attr dhall-json
+$ nix-env --install --attr dhall-json --file '<nixpkgs>'
 ```
 
 That will install the executables underneath the `~/.nix-profile/bin` directory,
