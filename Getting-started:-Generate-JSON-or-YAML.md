@@ -29,7 +29,32 @@ You will need to install the `dhall-json` package, which provides both the
 provide recommended installation instructions for Windows, OS X, and Linux
 operating systems:
 
-### Install using the Nix package manager (Recommended for Linux and OS X)
+### Install using Brew (Recommended for OS X)
+
+Run the following command to install the `dhall-json` package using `brew`:
+
+```bash
+$ brew install dhall-json
+```
+
+That will install the executables underneath the `/usr/local/bin` directory,
+which should already be on your executable search `PATH` for most correctly
+configured systems.
+
+Run the following command to verify that `brew` installed the executable:
+
+```bash
+$ /usr/local/bin/dhall-to-json --help
+```
+
+... and then run the following command to verify that the `dhall-to-json`
+executable is on your executable search `PATH`:
+
+```bash
+$ dhall-to-json --help
+```
+
+### Install using the Nix package manager (Recommended for Linux)
 
 > **Windows users:** This installation method is not recommended on Windows
 > because the Nix package manager relies on the Windows subsystem for Linux
@@ -40,6 +65,9 @@ operating systems:
 > * [Install Windows subsystem for Linux][wsl]
 > 
 > Once you have a Bash shell open then you can follow the remaining instructions
+
+> **OS X users:** This installation method will also work on OS X if you have
+> any issues installing with `brew`
 
 Install the Nix package manager by following the instructions here:
 
@@ -55,7 +83,7 @@ terminal to update your shell environment.  Don't forget to do this!
 > sure that you have OS X version 10.13.2 or newer and Nix version 1.11.15
 > or newer.
 
-Run the following commands to install the `dhall-json` package using the Nix
+Run the following command to install the `dhall-json` package using the Nix
 package manager:
 
 ```bash
