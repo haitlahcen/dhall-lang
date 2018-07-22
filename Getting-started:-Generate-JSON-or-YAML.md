@@ -41,70 +41,56 @@ That will install the executables underneath the `/usr/local/bin` directory,
 which should already be on your executable search `PATH` for most correctly
 configured systems.
 
-Run the following command to verify that `brew` installed the executable:
+Run the following commands to verify that `brew` installed the executables:
 
 ```bash
 $ /usr/local/bin/dhall-to-json --help
+$ /usr/local/bin/dhall-to-yaml --help
 ```
 
-... and then run the following command to verify that the `dhall-to-json`
+... and then run the following commands to verify that the `dhall-to-json`
 executable is on your executable search `PATH`:
 
 ```bash
 $ dhall-to-json --help
+$ dhall-to-yaml --help
 ```
 
-### Install using the Nix package manager (Recommended for Linux)
+### Install a statically linked binary (Linux only)
 
-> **Windows users:** This installation method is not recommended on Windows
-> because the Nix package manager relies on the Windows subsystem for Linux
-> (WSL) and at the time of this writing the WSL is still experimental.  If you
-> still want to try this installation route then you will need to first install
-> the WSL by following these instructions:
-> 
-> * [Install Windows subsystem for Linux][wsl]
-> 
-> Once you have a Bash shell open then you can follow the remaining instructions
-
-> **OS X users:** This installation method will also work on OS X if you have
-> any issues installing with `brew`
-
-Install the Nix package manager by following the instructions here:
-
-* [Install Nix][nix]
-
-> **Linux users:** Do not attempt to install Nix using your distribution's
-> package manager.  Use the installation script provided by the above link.
-
-The installer for the Nix package manager will then remind you to open a new
-terminal to update your shell environment.  Don't forget to do this!
-
-> **OS X users:** If you are using the High Sierra release of OS X, make
-> sure that you have OS X version 10.13.2 or newer and Nix version 1.11.15
-> or newer.
-
-Run the following command to install the `dhall-json` package using the Nix
-package manager:
+Run the following command to download the `dhall-json` executable:
 
 ```bash
-$ nix-env --install --attr dhall-json --file '<nixpkgs>'
+$ curl --location https://hydra.dhall-lang.org/job/dhall-json/master/tarball/latest/download-by-type/file/binary-dist | tar --extract --bzip2
 ```
 
-That will install the executables underneath the `~/.nix-profile/bin` directory,
-which should already be on your executable search `PATH` if you followed the
-Nix installation instructions correctly.
-
-Run the following command to verify that `nix-env` installed the executable:
+That should create a `./bin` subdirectory underneath your current directory
+containing two executables:
 
 ```bash
-$ ~/.nix-profile/bin/dhall-to-json --help
+$ ls ./bin
+dhall-to-json  dhall-to-yaml
 ```
 
-... and then run the following command to verify that the `dhall-to-json`
-executable is on your executable search `PATH`:
+Run the following commands to verify that the executables work:
+
+```bash
+$ ./bin/dhall-to-json --help
+$ ./bin/dhall-to-yaml --help
+```
+
+... and then copy those executables to `/usr/local/bin`:
+
+```bash
+$ cp ./bin/dhall-to-{json,yaml} /usr/local/bin
+```
+
+... and then run the following command to verify that the two
+executables are on your executable search `PATH`:
 
 ```bash
 $ dhall-to-json --help
+$ dhall-to-yaml --help
 ```
 
 ### Install using `stack`, the Haskell build tool (Recommended for Windows)
@@ -112,11 +98,6 @@ $ dhall-to-json --help
 > **Windows users**: Install [Git for Windows](http://gitforwindows.org/), which
 > includes Git Bash: a command line environment complete with Unix utilities.
 > Run the following commands within a Git Bash shell.
-
-> **Linux and OS X users**: This installation method will also work on Linux and
-> OS X.  However, this tutorial recommends using the Nix package manager over
-> `stack` because Nix will download a pre-built executable whereas `stack` will
-> compile the `dhall-json` package from source.
 
 Install `stack` by following the instructions on <https://haskellstack.org>
 
@@ -138,6 +119,7 @@ Run the following command to verify that `stack` installed the executable:
 
 ```bash
 $ ~/.local/bin/dhall-to-json --help
+$ ~/.local/bin/dhall-to-yaml --help
 ```
 
 ... and then run the following command to verify that the executable is on your
@@ -145,6 +127,7 @@ executable search `PATH`:
 
 ```bash
 $ dhall-to-json --help
+$ dhall-to-yaml --help
 ```
 
 ## Smoke test
