@@ -29,7 +29,7 @@ You will need to install the `dhall-json` package, which provides both the
 provide recommended installation instructions for Windows, OS X, and Linux
 operating systems:
 
-### Install using Brew (Recommended for OS X)
+### Install using Brew (OS X)
 
 Run the following command to install the `dhall-json` package using `brew`:
 
@@ -56,7 +56,7 @@ $ dhall-to-json --help
 $ dhall-to-yaml --help
 ```
 
-### Install a statically linked binary (Linux only)
+### Install a statically linked binary (Linux)
 
 Run the following command to download the `dhall-json` executable:
 
@@ -93,7 +93,7 @@ $ dhall-to-json --help
 $ dhall-to-yaml --help
 ```
 
-### Install using `stack`, the Haskell build tool (Recommended for Windows)
+### Install using `stack`, the Haskell build tool (Windows)
 
 > **Windows users**: Install [Git for Windows](http://gitforwindows.org/), which
 > includes Git Bash: a command line environment complete with Unix utilities.
