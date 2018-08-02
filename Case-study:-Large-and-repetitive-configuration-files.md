@@ -1,6 +1,6 @@
-This is a ~5 minute tutorial designed for you to read along.  If
+This is a passive tutorial designed for you to read along.  If
 you would like a longer tutorial where you can install the program
-and get your hands dirty then read:
+and get your hands dirty following along with examples then read:
 
 * [[Getting started: Generate JSON or YAML|Getting started: Generate JSON or YAML]]
 
