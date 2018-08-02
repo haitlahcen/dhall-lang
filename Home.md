@@ -8,6 +8,10 @@ These posts explain the context and motivation behind the language:
 
     Learn when it is appropriate to use the Dhall configuration language
 
+*   [[Core language features|Core language features]]
+
+    Tour the core programming language features
+
 *   [[Safety guarantees|Safety guarantees]]
 
     Study how Dhall configuration files provide programming language features without sacrificing safety
