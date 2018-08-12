@@ -1,5 +1,5 @@
 You can use the Haskell API to extend the Dhall configuration language with new
-built-in operations.  This section contains a simple Haskell recipe to add a
+built-in functions.  This section contains a simple Haskell recipe to add a
 new `Natural/equal` built-in function of type:
 
 ```haskell
