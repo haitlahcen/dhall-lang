@@ -48,6 +48,10 @@ These cookbooks teach you how to solve specific tasks:
 
     Embed recursive data types and functions in a non-recursive language
 
+*   [[How to add a new built in function|How to add a new built in function]]
+
+    Upgrade the language with new functionality
+
 ## References
 
 These comprehensive resources cover details that other texts will gloss over:
