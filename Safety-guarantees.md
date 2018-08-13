@@ -456,7 +456,7 @@ This is automatically an error even if you have not yet called the function
 with any argument.  The type system rejects the function definition even in
 isolation.
 
-You have to explicitly modify the function handle the `Optional` input by
+You have to explicitly modify the function to handle the `Optional` input by
 specifying what do to if the value is absent, typically by using
 `Optional/fold`:
 
