@@ -25,7 +25,7 @@ import Dhall.Core (Expr(..), ReifiedNormalizer(..))
 import qualified Data.Text.IO
 import qualified Dhall
 import qualified Dhall.Context
-import qualified Lens.Family                      as Lens
+import qualified Lens.Family   as Lens
 
 main :: IO ()
 main = do
