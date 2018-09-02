@@ -52,6 +52,10 @@ These cookbooks teach you how to solve specific tasks:
 
     Upgrade the language with new functionality
 
+*   [[How to type-check and normalize incomplete code|How to type-check and normalize incomplete code]]
+
+    Benefit from the language even when prototyping
+
 ## References
 
 These comprehensive resources cover details that other texts will gloss over:
