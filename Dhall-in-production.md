@@ -1,5 +1,9 @@
 This section covers confirmed uses of Dhall in production.  You can open an issue if you would like to list your company here:
 
+## [AlasConnect](http://alasconnect.com/)
+
+Uses Haskell bindings to Dhall to configure application servers
+
 ## [Awake Security](https://awakesecurity.com/)
 
 Uses Haskell bindings to Dhall to simplify redundant appliance cluster configurations
