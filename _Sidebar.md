@@ -9,6 +9,7 @@
     * [[Cheatsheet|Cheatsheet]]
     * [[Frequently Asked Questions (FAQ)|Frequently Asked Questions (FAQ)]]
     * [[Migration: Swapped syntax for Natural numbers and Integers|Migration: Swapped syntax for Natural numbers and Integers]]
+    * [[Migration: Deprecation of constructors keyword|Migration: Deprecation of constructors keyword]]
     * [[How to translate recursive code to Dhall|How to translate recursive code to Dhall]]
     * [[How to add a new built in function|How to add a new built in function]]
     * [[How to type-check and normalize incomplete code|How to type-check and normalize incomplete code]]
