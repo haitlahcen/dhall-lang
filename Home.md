@@ -44,6 +44,10 @@ These cookbooks teach you how to solve specific tasks:
 
     Migrate your code to support the change in syntax for `Natural` numbers and `Integer`s
 
+*   [[Migration: Deprecation of constructors keyword|Migration: Deprecation of constructors keyword]]
+
+    Migrate your code to remove the obsolete `constructors` keyword
+
 *   [[How to translate recursive code to Dhall|How to translate recursive code to Dhall]]
 
     Embed recursive data types and functions in a non-recursive language
