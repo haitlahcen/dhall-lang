@@ -63,7 +63,7 @@ $ dhall-to-yaml --help
 Run the following command to download the `dhall-json` executable:
 
 ```bash
-$ curl --location https://hydra.dhall-lang.org/job/dhall-json/master/tarball/latest/download-by-type/file/binary-dist | tar --extract --bzip2
+$ curl --location http://hydra.dhall-lang.org/job/dhall-haskell/master/tarball-dhall-json/latest/download-by-type/file/binary-dist | tar --extract --bzip2
 ```
 
 That should create a `./bin` subdirectory underneath your current directory
