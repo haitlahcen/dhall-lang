@@ -18,11 +18,13 @@ records and functions.
 
 ## Installation
 
-> **NOTE**: This tutorial assumes that you are using version 1.2.0 or later
+> **NOTE**: This tutorial assumes that you are using version 1.2.5 or later
 > of the `dhall-json` package.  Some of the following examples will not
 > work correctly for older versions of the package.  For more details, see:
 >
 > [[Migration: Swapped syntax for Natural numbers and Integers|Migration: Swapped syntax for Natural numbers and Integers]]
+>
+> [[Migration: Deprecation of constructors keyword|Migration: Deprecation of constructors keyword]]
 
 You will need to install the `dhall-json` package, which provides both the
 `dhall-to-json` and `dhall-to-yaml` executables.  The following sections
@@ -208,8 +210,8 @@ expressions.
 
 The Dhall configuration language is fairly similar to JSON if you ignore
 Dhall's programming language features.  They both have records, lists, numbers,
-strings, and boolean values.  However, one major difference is that Dhall is
-typed and rejects some configurations that JSON would normally accept.
+strings, and boolean values.  However, Dhall is typed and rejects some
+configurations that JSON would normally accept.
 
 For example, the following command fails because Dhall requires lists to have
 elements of the same type:
@@ -717,75 +719,65 @@ For example, the equivalent Dhall configuration would be:
 ```haskell
 -- union.dhall
 
-[ < Left = 1 | Right : Bool >
-, < Right = True | Left : Natural >
-]
+let Element = < Left : Natural | Right : Bool >
+
+in  [ Element.Left 1, Element.Right True ]
 ```
 
-Every union has multiple possible alternatives, each labeled by a tag.  For
-example, the union literals in the above Dhall configuration both had two
-alternatives labeled `Left` and `Right`.
+Every union type has multiple possible alternatives, each labeled by a name and a
+type.  For example, the union type named `Element` in the above Dhall
+configuration has two alternatives:
 
-A union literal defines the value of exactly one alternative and only specifies
-the type of the remaining alternatives.  For example, the first union literal:
+* The first alternative is named `Left` and can store `Natural` numbers
+* The second alternative is named `Right` and can store `Bool`s
 
-```haskell
-< Left = 1 | Right : Bool >
-```
-
-... specified the value of the `Left` alternative and specified the type of the
-`Right` alternative.  The second union literal:
-
-```haskell
-< Right = True | Left : Natural >
-```
-
-... specified the value of the `Right` alternative and specified the type of the
-`Left` alternative.
-
-The `dhall-to-json` executable strips the tags when translating union literals
+The `dhall-to-json` executable strips the names when translating union literals
 to JSON.  This trick lets you bridge between strongly typed Dhall configuration
-files and their weakly typed JSON equivalents.
+files and their weakly typed JSON equivalents:
 
-As you add more alternatives and union literals they can get repetitive.
-Fortunately, the language provides a `constructors` keyword to reduce this
-repetition.  Given a union type the `constructors` keyword will generate a
-record of constructors for each alternative of the union, like this:
+```bash
+$ dhall-to-json <<< './union.dhall' 
+```
+```json
+[1,true]
+```
+
+Here is a more sophisticated example showcasing how each union alternative
+can be a record with different fields present:
 
 ```haskell
--- constructors.dhall
-    let Package =
-          < Local :
-              { relativePath : Text }
-          | GitHub :
-              { repository : Text, revision : Text }
-          | Hackage :
-              { package : Text, version : Text }
-          >
+-- package.dhall
 
-in  let package = constructors Package
+let Package =
+      < Local :
+          { relativePath : Text }
+      | GitHub :
+          { repository : Text, revision : Text }
+      | Hackage :
+          { package : Text, version : Text }
+      >
 
-in  [ package.GitHub
+in  [ Package.GitHub
       { repository =
           "https://github.com/Gabriel439/Haskell-Turtle-Library.git"
       , revision =
           "ae5edf227b515b34c1cb6c89d9c58ea0eece12d5"
       }
-    , package.Local { relativePath = "~/proj/optparse-applicative" }
-    , package.Local { relativePath = "~/proj/discrimination" }
-    , package.Hackage { package = "lens", version = "4.15.4" }
-    , package.GitHub
+    , Package.Local { relativePath = "~/proj/optparse-applicative" }
+    , Package.Local { relativePath = "~/proj/discrimination" }
+    , Package.Hackage { package = "lens", version = "4.15.4" }
+    , Package.GitHub
       { repository =
           "https://github.com/haskell/text.git"
       , revision =
           "ccbfabedea1cf5b38ff19f37549feaf01225e537"
       }
-    , package.Local { relativePath = "~/proj/servant-swagger" }
-    , package.Hackage { package = "aeson", version = "1.2.3.0" }
+    , Package.Local { relativePath = "~/proj/servant-swagger" }
+    , Package.Hackage { package = "aeson", version = "1.2.3.0" }
     ]
 ```
 
-... which generates the following JSON stripped of the constructors:
+... which generates the following JSON:
 
 ```json
 [
@@ -816,29 +808,6 @@ in  [ package.GitHub
     }
 ]
 ```
-
-We can understand better how this works by giving an explicit type
-signature to the `packages` record:
-
-```haskell
-    …
-
-in  let package
-        : { Local :
-              { relativePath : Text } → Package
-          , GitHub :
-              { repository : Text, revision : Text } → Package
-          , Hackage :
-              { package : Text, version : Text } → Package
-          }
-        = constructors Package
-
-in  …
-```
-
-The `package` record contains one field per alternative of the `Package` type.
-Each field contains a function that converts the corresponding type of alternative
-into a `Package`.
 
 ## Dynamic records
 
