@@ -59,14 +59,16 @@ Natural
 In practice, this would not work:
 
 ```haskell
-   let genericRecord = List { mapKey : Text, mapValue : Text }
-in ([] : genericRecord)
+let genericRecord = List { mapKey : Text, mapValue : Text }
+
+in  [] : genericRecord
 ```
 
 Instead, you have to do this:
 ```haskell
-   let genericRecord = { mapKey : Text, mapValue : Text }
-in ([] : List genericRecord)
+let genericRecord = { mapKey : Text, mapValue : Text }
+
+in  [] : List genericRecord
 ```
 
 The reason for this is that the type annotation for empty lists is not a real type annotation. It's actually part of the grammar:
@@ -106,11 +108,11 @@ Hola, Jane!
 The Dhall equivalent of the above code would be:
 
 ```haskell
-    let greet =
-            λ(args : { greeting : Text, name : Text })
-          → "${args.greeting}, ${args.name}!"
+let greet =
+        λ(args : { greeting : Text, name : Text })
+      → "${args.greeting}, ${args.name}!"
 
-in  let default = { greeting = "Hello", name = "John" }
+let default = { greeting = "Hello", name = "John" }
 
 in  ''
     ${greet default}
