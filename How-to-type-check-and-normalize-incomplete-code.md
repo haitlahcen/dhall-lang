@@ -10,24 +10,24 @@ implemented yet:
 
 ```haskell
   λ(TODO : ∀(a : Type) → a)
-→     let List/map =
-            https://raw.githubusercontent.com/dhall-lang/Prelude/302881a17491f3c72238975a6c3e7aab603b9a96/List/map sha256:fe612cecad4dc5ef3f884dcd705e6747dd0e977109c5fbe5cee925d8f5ad6f4b
+→ let List/map =
+        https://prelude.dhall-lang.org/List/map
   
-  in  let Text/concatSep =
-            https://raw.githubusercontent.com/dhall-lang/Prelude/302881a17491f3c72238975a6c3e7aab603b9a96/Text/concatSep sha256:271078081f5b336a1c3e47c3104736b1ec82043e9b571c80f6030a9556869e26
+  let Text/concatSep =
+        https://prelude.dhall-lang.org/Text/concatSep
   
-  in  let Person = { name : Text, age : Natural }
+  let Person = { name : Text, age : Natural }
   
-      --  ↓ You can leave functions unimplemented
-  in  let renderPerson = TODO (Person → Text)
+  --  ↓ You can leave functions unimplemented
+  let renderPerson = TODO (Person → Text)
   
-  in  let renderList =
-            λ(elements : List Text) → "[" ++ Text/concatSep ", " elements ++ "]"
+  let renderList =
+        λ(elements : List Text) → "[" ++ Text/concatSep ", " elements ++ "]"
   
-  in  let renderPeople
-          : List Person → Text
-          =   λ(people : List Person)
-            → renderList (List/map Person Text renderPerson people)
+  let renderPeople
+      : List Person → Text
+      =   λ(people : List Person)
+        → renderList (List/map Person Text renderPerson people)
   
   in  renderPeople
       [ { name = "John", age = 23 }
