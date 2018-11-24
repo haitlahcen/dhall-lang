@@ -60,10 +60,16 @@ $ dhall-to-yaml --help
 
 ### Install a statically linked binary (Linux)
 
-Run the following command to download the `dhall-json` executable:
+To install the latest stable release, visit the release page here:
+
+* [Releases - dhall-lang/dhall-haskell](https://github.com/dhall-lang/dhall-haskell/releases)
+
+... and download `dhall-json-X.Y.Z-x86_64-linux.tar.bz2` replacing `X.Y.Z` with
+the latest version of `dhall-json`.  Then navigate to the directory where you
+downloaded the archive and run:
 
 ```bash
-$ curl --location http://hydra.dhall-lang.org/job/dhall-haskell/master/tarball-dhall-json/latest/download-by-type/file/binary-dist | tar --extract --bzip2
+$ tar --extract --bzip2 --file dhall-json-*-x86_64-linux.tar.bz2
 ```
 
 That should create a `./bin` subdirectory underneath your current directory
@@ -668,15 +674,16 @@ equivalent of a nullable value), like this:
 ```haskell
 -- ./optional.dhall
 
-[ { x = 1, y = [] : Optional Natural }
-, { x = 2, y = [ 3 ] : Optional Natural }
+[ { x = 1, y = None Natural }
+, { x = 2, y = Some 3 }
 ]
 ```
 
-`Optional` values look just like lists except that they have at most 1 element
-and they have a mandatory type annotation.
+`Optional` values can either be present (i.e. `Some` followed by the value) or
+absent (i.e. `None` followed by the type).
 
-`dhall-to-json` by default converts an empty `Optional` value to `null`:
+`dhall-to-json` by default converts an empty (i.e. `None`) `Optional` value to
+`null`:
 
 ```bash
 $ dhall-to-json <<< './optional.dhall'
