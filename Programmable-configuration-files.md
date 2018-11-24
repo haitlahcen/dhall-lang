@@ -140,22 +140,22 @@ Dhall configuration:
 ```haskell
 -- config0.dhall
 
-    let ordinaryUser =
-            λ(user : Text)
-          →     let privateKey = "/home/${user}/.ssh/id_rsa"
-            
-            in  let publicKey = "${privateKey}.pub"
-            
-            in  { privateKey = privateKey
-                , publicKey  = publicKey
-                , user       = user
-                }
+let ordinaryUser =
+        λ(user : Text)
+      → let privateKey = "/home/${user}/.ssh/id_rsa"
+        
+        let publicKey = "${privateKey}.pub"
+        
+        in  { privateKey = privateKey, publicKey = publicKey, user = user }
 
 in  [ ordinaryUser "john"
     , ordinaryUser "jane"
-    , { privateKey = "/etc/jenkins/jenkins_rsa"
-      , publicKey  = "/etc/jenkins/jenkins_rsa.pub"
-      , user       = "jenkins"
+    , { privateKey =
+          "/etc/jenkins/jenkins_rsa"
+      , publicKey =
+          "/etc/jenkins/jenkins_rsa.pub"
+      , user =
+          "jenkins"
       }
     , ordinaryUser "chad"
     ]
@@ -203,22 +203,22 @@ Now adding a new user like `alice` is a one-line change since we can reuse our
 ```haskell
 -- config1.dhall
 
-    let ordinaryUser =
-            λ(user : Text)
-          →     let privateKey = "/home/${user}/.ssh/id_rsa"
-            
-            in  let publicKey = "${privateKey}.pub"
-            
-            in  { privateKey = privateKey
-                , publicKey  = publicKey
-                , user       = user
-                }
+let ordinaryUser =
+        λ(user : Text)
+      → let privateKey = "/home/${user}/.ssh/id_rsa"
+        
+        let publicKey = "${privateKey}.pub"
+        
+        in  { privateKey = privateKey, publicKey = publicKey, user = user }
 
 in  [ ordinaryUser "john"
     , ordinaryUser "jane"
-    , { privateKey = "/etc/jenkins/jenkins_rsa"
-      , publicKey  = "/etc/jenkins/jenkins_rsa.pub"
-      , user       = "jenkins"
+    , { privateKey =
+          "/etc/jenkins/jenkins_rsa"
+      , publicKey =
+          "/etc/jenkins/jenkins_rsa.pub"
+      , user =
+          "jenkins"
       }
     , ordinaryUser "chad"
     , ordinaryUser "alice"
@@ -231,26 +231,34 @@ change:
 ```haskell
 -- config2.dhall
 
-    let ordinaryUser =
-            λ(user : Text)
-          →     let home = "/home/${user}"
-            
-            in  let privateKey = "${home}/.ssh/id_rsa"
-            
-            in  let publicKey = "${privateKey}.pub"
-            
-            in  { home       = home
-                , privateKey = privateKey
-                , publicKey  = publicKey
-                , user       = user
-                }
+let ordinaryUser =
+        λ(user : Text)
+      → let home = "/home/${user}"
+        
+        let privateKey = "${home}/.ssh/id_rsa"
+        
+        let publicKey = "${privateKey}.pub"
+        
+        in  { home =
+                home
+            , privateKey =
+                privateKey
+            , publicKey =
+                publicKey
+            , user =
+                user
+            }
 
 in  [ ordinaryUser "john"
     , ordinaryUser "jane"
-    , { home       = "/home/jenkins"
-      , privateKey = "/etc/jenkins/jenkins_rsa"
-      , publicKey  = "/etc/jenkins/jenkins_rsa.pub"
-      , user       = "jenkins"
+    , { home =
+          "/home/jenkins"
+      , privateKey =
+          "/etc/jenkins/jenkins_rsa"
+      , publicKey =
+          "/etc/jenkins/jenkins_rsa.pub"
+      , user =
+          "jenkins"
       }
     , ordinaryUser "chad"
     , ordinaryUser "alice"
@@ -299,7 +307,7 @@ $ dhall-to-json --pretty <<< './config2.dhall'
 
 ## Programmable configuration files
 
-Dhall is not just a programming language to generate configuration files.  The
+Dhall is not just a programming language to generate JSON files.  The
 Dhall language is actually a configuration file format of its own that some
 languages can read directly without converting to an intermediate JSON
 representation.
@@ -311,36 +319,53 @@ prints the type of the expression (to standard error) followed by the result of
 evaluating the expression:
 
 ```bash
-$ dhall <<< './config2.dhall' | dhall-format
+$ dhall <<< './config2.dhall'
 ```
 ```haskell
-List { home : Text, privateKey : Text, publicKey : Text, user : Text }
-```
-```haskell
-[ { home       = "/home/john"
-  , privateKey = "/home/john/.ssh/id_rsa"
-  , publicKey  = "/home/john/.ssh/id_rsa.pub"
-  , user       = "john"
+[ { home =
+      "/home/john"
+  , privateKey =
+      "/home/john/.ssh/id_rsa"
+  , publicKey =
+      "/home/john/.ssh/id_rsa.pub"
+  , user =
+      "john"
   }
-, { home       = "/home/jane"
-  , privateKey = "/home/jane/.ssh/id_rsa"
-  , publicKey  = "/home/jane/.ssh/id_rsa.pub"
-  , user       = "jane"
+, { home =
+      "/home/jane"
+  , privateKey =
+      "/home/jane/.ssh/id_rsa"
+  , publicKey =
+      "/home/jane/.ssh/id_rsa.pub"
+  , user =
+      "jane"
   }
-, { home       = "/home/jenkins"
-  , privateKey = "/etc/jenkins/jenkins_rsa"
-  , publicKey  = "/etc/jenkins/jenkins_rsa.pub"
-  , user       = "jenkins"
+, { home =
+      "/home/jenkins"
+  , privateKey =
+      "/etc/jenkins/jenkins_rsa"
+  , publicKey =
+      "/etc/jenkins/jenkins_rsa.pub"
+  , user =
+      "jenkins"
   }
-, { home       = "/home/chad"
-  , privateKey = "/home/chad/.ssh/id_rsa"
-  , publicKey  = "/home/chad/.ssh/id_rsa.pub"
-  , user       = "chad"
+, { home =
+      "/home/chad"
+  , privateKey =
+      "/home/chad/.ssh/id_rsa"
+  , publicKey =
+      "/home/chad/.ssh/id_rsa.pub"
+  , user =
+      "chad"
   }
-, { home       = "/home/alice"
-  , privateKey = "/home/alice/.ssh/id_rsa"
-  , publicKey  = "/home/alice/.ssh/id_rsa.pub"
-  , user       = "alice"
+, { home =
+      "/home/alice"
+  , privateKey =
+      "/home/alice/.ssh/id_rsa"
+  , publicKey =
+      "/home/alice/.ssh/id_rsa.pub"
+  , user =
+      "alice"
   }
 ]
 ```
@@ -353,9 +378,6 @@ we get the same result:
 
 ```bash
 $ dhall <<< './config2.dhall' | dhall-to-json --pretty
-```
-```haskell
-List { home : Text, privateKey : Text, publicKey : Text, user : Text }
 ```
 ```json
 [
