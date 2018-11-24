@@ -166,14 +166,21 @@ The `dhall-to-json` help output indicates that the executable accepts a
 
 ```bash
 $ dhall-to-json --help
-Compile Dhall to JSON
-
-Usage: dhall-to-json [--explain] [--pretty]
+Usage: dhall-to-json [--explain] [--pretty] [--omitNull] ([--key ARG]
+                     [--value ARG] | [--noMaps])
+  Compile Dhall to JSON
 
 Available options:
   -h,--help                Show this help text
   --explain                Explain error messages in detail
   --pretty                 Pretty print generated JSON
+  --omitNull               Omit record fields that are null
+  --key ARG                Reserved key field name for association
+                           lists (default: mapKey)
+  --value ARG              Reserved value field name for association
+                           lists (default: mapValue)
+  --noMaps                 Disable conversion of association lists to
+                           homogeneous maps
 ```
 
 > **Exercise:** Run this command to generate pretty-printed JSON output:
@@ -234,14 +241,21 @@ you can see that the executable accepts an `--explain` flag:
 
 ```bash
 $ dhall-to-json --help
-Compile Dhall to JSON
-
-Usage: dhall-to-json [--explain] [--pretty]
+Usage: dhall-to-json [--explain] [--pretty] [--omitNull] ([--key ARG]
+                     [--value ARG] | [--noMaps])
+  Compile Dhall to JSON
 
 Available options:
   -h,--help                Show this help text
   --explain                Explain error messages in detail
   --pretty                 Pretty print generated JSON
+  --omitNull               Omit record fields that are null
+  --key ARG                Reserved key field name for association
+                           lists (default: mapKey)
+  --value ARG              Reserved value field name for association
+                           lists (default: mapValue)
+  --noMaps                 Disable conversion of association lists to
+                           homogeneous maps
 ```
 
 > **Exercise**: Add the `--explain` flag to the previous command:
@@ -311,10 +325,10 @@ $ dhall-to-json <<< 'let x = [1, 2, 3] in [x, x, x]'
 [[1,2,3],[1,2,3],[1,2,3]]
 ```
 
-You can define multiple variables by nesting `let` expressions, like this:
+You can define multiple variables using multiple `let`s, like this:
 
 ```bash
-$ dhall-to-json <<< 'let x = 1 in let y = [x, x] in [y, y]' 
+$ dhall-to-json <<< 'let x = 1 let y = [x, x] in [y, y]' 
 ```
 ```json
 [[1,1],[1,1]]
@@ -323,33 +337,25 @@ $ dhall-to-json <<< 'let x = 1 in let y = [x, x] in [y, y]'
 The Dhall language is whitespace-insensitive (just like JSON), so this program:
 
 ```haskell
-let x = 1 in let y = 2 in [x, y]
+let x = 1 let y = 2 in [x, y]
 ```
 
 ... is the same as this program:
 
 ```haskell
-let x = 1 in
-let y = 2 in
-[x, y]
-```
-
-... and is also the same as this program:
-
-```haskell
-    let x = 1
-in  let y = 2
+let x = 1
+let y = 2
 in  [x, y]
 ```
 
 > **Exercise:** Save the following Dhall configuration to `employees.dhall`:
 > 
 > ```haskell
->     let job = { department = "Data Platform", title = "Software Engineer" }
+> let job = { department = "Data Platform", title = "Software Engineer" }
 > 
-> in  let john = { age = 23, name = "John Doe", position = job }
+> let john = { age = 23, name = "John Doe", position = job }
 > 
-> in  let alice = { age = 24, name = "Alice Smith", position = job }
+> let alice = { age = 24, name = "Alice Smith", position = job }
 > 
 > in  [ john, alice ]
 > ```
@@ -454,29 +460,41 @@ $ dhall-to-json <<< 'let twice = λ(x : Natural) → [x, x] in twice 2'
 > generate?
 >
 > ```haskell
->     let smallServer =
->             λ(hostName : Text)
->           → { cpus            = 1
->             , gigabytesOfRAM  = 1
->             , hostName        = hostName
->             , terabytesOfDisk = 1
->             }
+> let smallServer =
+>         λ(hostName : Text)
+>       → { cpus =
+>             1
+>         , gigabytesOfRAM =
+>             1
+>         , hostName =
+>             hostName
+>         , terabytesOfDisk =
+>             1
+>         }
 > 
-> in  let mediumServer =
->             λ(hostName : Text)
->           → { cpus            = 8
->             , gigabytesOfRAM  = 16
->             , hostName        = hostName
->             , terabytesOfDisk = 4
->             }
+> let mediumServer =
+>         λ(hostName : Text)
+>       → { cpus =
+>             8
+>         , gigabytesOfRAM =
+>             16
+>         , hostName =
+>             hostName
+>         , terabytesOfDisk =
+>             4
+>         }
 > 
-> in  let largeServer =
->             λ(hostName : Text)
->           → { cpus            = 64
->             , gigabytesOfRAM  = 256
->             , hostName        = hostName
->             , terabytesOfDisk = 16
->             }
+> let largeServer =
+>         λ(hostName : Text)
+>       → { cpus =
+>             64
+>         , gigabytesOfRAM =
+>             256
+>         , hostName =
+>             hostName
+>         , terabytesOfDisk =
+>             16
+>         }
 > 
 > in  [ smallServer "eu-west.example.com"
 >     , largeServer "us-east.example.com"
@@ -502,16 +520,20 @@ $ dhall-to-json <<< 'let both = λ(x : Natural) → λ(y : Natural) → [x, y] i
 > generate?
 >
 > ```haskell
->     let educationalBook =
->             λ(publisher : Text)
->           → λ(title : Text)
->           → { category   = "Nonfiction"
->             , department = "Books"
->             , publisher  = publisher
->             , title      = title
->             }
+> let educationalBook =
+>         λ(publisher : Text)
+>       → λ(title : Text)
+>       → { category =
+>             "Nonfiction"
+>         , department =
+>             "Books"
+>         , publisher =
+>             publisher
+>         , title =
+>             title
+>         }
 > 
-> in  let makeOreilly = educationalBook "O'Reilly Media"
+> let makeOreilly = educationalBook "O'Reilly Media"
 > 
 > in  [ makeOreilly "Microservices for Java Developers"
 >     , educationalBook "Addison Wesley" "The Go Programming Language"
@@ -548,30 +570,18 @@ We can rewrite our previous server configuration example to use this operator
 instead of using functions:
 
 ```haskell
-    let smallServer =
-            { cpus            = 1
-            , gigabytesOfRAM  = 1
-            , terabytesOfDisk = 1
-            }
+let smallServer = { cpus = 1, gigabytesOfRAM = 1, terabytesOfDisk = 1 }
 
-in  let mediumServer =
-            { cpus            = 8
-            , gigabytesOfRAM  = 16
-            , terabytesOfDisk = 4
-            }
+let mediumServer = { cpus = 8, gigabytesOfRAM = 16, terabytesOfDisk = 4 }
 
-in  let largeServer =
-            { cpus            = 64
-            , gigabytesOfRAM  = 256
-            , terabytesOfDisk = 16
-            }
+let largeServer = { cpus = 64, gigabytesOfRAM = 256, terabytesOfDisk = 16 }
 
-in  [ smallServer  ∧ { hostName = "eu-west.example.com"      }
-    , largeServer  ∧ { hostName = "us-east.example.com"      }
-    , largeServer  ∧ { hostName = "ap-northeast.example.com" }
-    , mediumServer ∧ { hostName = "us-west.example.com"      }
-    , smallServer  ∧ { hostName = "sa-east.example.com"      }
-    , largeServer  ∧ { hostName = "ca-central.example.com"   }
+in  [ smallServer ∧ { hostName = "eu-west.example.com" }
+    , largeServer ∧ { hostName = "us-east.example.com" }
+    , largeServer ∧ { hostName = "ap-northeast.example.com" }
+    , mediumServer ∧ { hostName = "us-west.example.com" }
+    , smallServer ∧ { hostName = "sa-east.example.com" }
+    , largeServer ∧ { hostName = "ca-central.example.com" }
     ]
 ```
 
