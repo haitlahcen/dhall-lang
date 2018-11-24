@@ -122,17 +122,13 @@
 
 *   `Optional`:
 
-    Like a list, except at most one element (i.e. an `Optional` element)
-
-    Type annotation is always mandatory:
-
     ```haskell
-    [] : Optional Natural, [1] : Optional Natural
+    None Natural, Some 1 : Optional Natural
 
     
-    Optional/fold Natural ([ 2 ] : Optional Natural) Text Natural/show "" = "2"
+    Optional/fold Natural (Some 2) Text Natural/show "" = "2"
 
-    Optional/build Natural (λ(optional : Type) → λ(just : Natural → optional) → λ(nothing : optional) → just 1) = [ 1 ] : Optional Natural
+    Optional/build Natural (λ(optional : Type) → λ(just : Natural → optional) → λ(nothing : optional) → just 1) = Some 1
     ```
 
 *   Records
@@ -164,19 +160,19 @@
 *   `let` expressions:
   
     ```haskell
-       let x = True
+    let x = True
 
-    in let y = False
+    let y = False
 
-    in x && y
+    in  x && y
     ```
 
     You can also use `let` expressions to name functions and imported values:
 
     ```haskell
-        let not = λ(x : Bool) → x == False
+    let not = λ(x : Bool) → x == False
 
-    in  let show = http://prelude.dhall-lang.org/Bool/show
+    let show = https://prelude.dhall-lang.org/Bool/show
 
     in  show (not False)
     ```
@@ -211,9 +207,9 @@
     Imported paths or URLs are substituted for their contents:
 
     ```haskell
-    [ ./you/can/import/paths, http://example.com/you/can/import/urls ] : ./even/for/types
+    [ ./you/can/import/paths, https://example.com/you/can/import/urls ] : ./even/for/types
     ```
 
 *   Prelude
 
-    You can find latest Prelude of importable functions at http://prelude.dhall-lang.org/
+    You can find latest Prelude of importable functions at https://prelude.dhall-lang.org/
