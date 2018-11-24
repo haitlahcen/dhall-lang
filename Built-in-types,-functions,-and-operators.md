@@ -1091,41 +1091,41 @@ Optional
 
 ## Literals: `Optional`
 
-An `Optional` literal is either 0 or 1 values inside square brackets followed by
-a type annotation
+An `Optional` literal is either a present value wrapped in a `Some` or an
+absent value using `None` followed by a type
 
 ### Example
 
 ```bash
-$ dhall <<< '[] : Optional Natural'
+$ dhall <<< 'None Natural'
 ```
 ```haskell
 Optional Natural
 
-[] : Optional Natural
+None Natural
 ```
 
 ```bash
-$ dhall <<< '[ 1 ] : Optional Natural'
+$ dhall <<< 'Some 1'
 ```
 ```haskell
 Optional Natural
 
-[ 1 ] : Optional Natural
+Some 1
 ```
 
 ### Type
 
 ```
 Γ ⊢ t : Type   Γ ⊢ x : t
-───────────────────────────────────
-Γ ⊢ ([x] : Optional t) : Optional t
+────────────────────────
+Γ ⊢ Some x : Optional t
 ```
 
 ```
 Γ ⊢ t : Type
-──────────────────────────────────
-Γ ⊢ ([] : Optional t) : Optional t
+───────────────────────
+Γ ⊢ None t : Optional t
 ```
 
 ## Function: `Optional/fold`
@@ -1133,7 +1133,7 @@ Optional Natural
 ### Example
 
 ```bash
-$ dhall <<< 'Optional/fold Text (["ABC"] : Optional Text) Text (λ(t : Text) → t) ""'
+$ dhall <<< 'Optional/fold Text (Some ["ABC"]) Text (λ(t : Text) → t) ""'
 ```
 ```haskell
 Text
@@ -1151,9 +1151,9 @@ Text
 ### Rules
 
 ```haskell
-Optional/fold a ([]  : Optional a) o j n = n
+Optional/fold a (None a) o j n = n
 
-Optional/fold a ([x] : Optional a) o j n = j x
+Optional/fold a (Some x) o j n = j x
 ```
 
 ## Function: `Optional/build`
