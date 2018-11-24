@@ -50,7 +50,7 @@ The following configuration file is a valid Dhall expression that:
 * imports a type from a relative file located at `./schema.dhall`
 
 ```haskell
-    let concatSep = http://prelude.dhall-lang.org/Text/concatSep
+let concatSep = http://prelude.dhall-lang.org/Text/concatSep
 
 in  { name = env:USER as Text
     , age  = 23
@@ -130,7 +130,7 @@ sha256:fa909c0b2fd4f9edb46df7ff72ae105ad0bd0ae00baa7fe53b0e43863f9bd34a
 imported expression, like this:
 
 ```haskell
-    let concatSep = http://prelude.dhall-lang.org/Prelude/Text/concatSep sha256:fa909c0b2fd4f9edb46df7ff72ae105ad0bd0ae00baa7fe53b0e43863f9bd34a
+let concatSep = http://prelude.dhall-lang.org/Prelude/Text/concatSep sha256:fa909c0b2fd4f9edb46df7ff72ae105ad0bd0ae00baa7fe53b0e43863f9bd34a
 
 in  { name = env:USER as Text
     , age  = 23
@@ -193,7 +193,7 @@ information about your environment or exfiltrate data to an untrusted source.
 Revisiting our previous example:
 
 ```haskell
-    let concatSep = http://prelude.dhall-lang.org/Prelude/Text/concatSep sha256:fa909c0b2fd4f9edb46df7ff72ae105ad0bd0ae00baa7fe53b0e43863f9bd34a
+let concatSep = http://prelude.dhall-lang.org/Prelude/Text/concatSep sha256:fa909c0b2fd4f9edb46df7ff72ae105ad0bd0ae00baa7fe53b0e43863f9bd34a
 
 in  { name = env:USER as Text
     , age  = 23
@@ -423,7 +423,7 @@ returns an empty value:
 $ dhall <<< 'List/head Natural ([] : List Natural)'
 ```
 ```haskell
-[] : Optional Natural
+None Natural
 ```
 
 This is because `List/head` returns an `Optional` result which will be empty
