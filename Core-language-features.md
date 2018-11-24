@@ -104,116 +104,128 @@ configuration file, which supports multi-line string literals (like YAML):
 ```haskell
 -- example0.dhall
 
-[   {   name    = "dhall"
-    ,   author  = "Gabriel Gonzalez"
-    ,   license = ''
-            Copyright 2017 Gabriel Gonzalez
-
-            Redistribution and use in source and binary forms, with or without
-            modification, are permitted provided that the following conditions are met:
-
-            1. Redistributions of source code must retain the above copyright notice, this
-               list of conditions and the following disclaimer.
-
-            2. Redistributions in binary form must reproduce the above copyright notice,
-               this list of conditions and the following disclaimer in the documentation
-               and/or other materials provided with the distribution.
-
-            3. Neither the name of the copyright holder nor the names of its contributors
-               may be used to endorse or promote products derived from this software without
-               specific prior written permission.
-
-            THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-            ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-            WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-            DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-            FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-            DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-            SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-            CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-            OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-            OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        ''
-    }
-,   {   name    = "conduit"
-    ,   author  = "Michael Snoyman"
-    ,   license = ''
-            Copyright 2012 Michael Snoyman
-
-            Permission is hereby granted, free of charge, to any person obtaining a copy of
-            this software and associated documentation files (the "Software"), to deal in
-            the Software without restriction, including without limitation the rights to
-            use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-            of the Software, and to permit persons to whom the Software is furnished to do
-            so, subject to the following conditions:
-
-            The above copyright notice and this permission notice shall be included in all
-            copies or substantial portions of the Software.
-
-            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-            SOFTWARE.
-        ''
-    }
-,   {   name    = "async"
-    ,   author  = "Simon Marlow"
-    ,   license = ''
-            Copyright 2012 Simon Marlow
-
-            Redistribution and use in source and binary forms, with or without
-            modification, are permitted provided that the following conditions are met:
-
-            1. Redistributions of source code must retain the above copyright notice, this
-               list of conditions and the following disclaimer.
-
-            2. Redistributions in binary form must reproduce the above copyright notice,
-               this list of conditions and the following disclaimer in the documentation
-               and/or other materials provided with the distribution.
-
-            3. Neither the name of the copyright holder nor the names of its contributors
-               may be used to endorse or promote products derived from this software without
-               specific prior written permission.
-
-            THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-            ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-            WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-            DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-            FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-            DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-            SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-            CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-            OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-            OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        ''
-    }
-,   {   name    = "system-filepath"
-    ,   author  = "John Milikin"
-    ,   license = ''
-            Copyright 2010 John Milikin
-
-            Permission is hereby granted, free of charge, to any person obtaining a copy of
-            this software and associated documentation files (the "Software"), to deal in
-            the Software without restriction, including without limitation the rights to
-            use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-            of the Software, and to permit persons to whom the Software is furnished to do
-            so, subject to the following conditions:
-
-            The above copyright notice and this permission notice shall be included in all
-            copies or substantial portions of the Software.
-
-            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-            SOFTWARE.
-        ''
-    }
+[ { name =
+      "dhall"
+  , author =
+      "Gabriel Gonzalez"
+  , license =
+      ''
+      Copyright 2017 Gabriel Gonzalez
+      
+      Redistribution and use in source and binary forms, with or without
+      modification, are permitted provided that the following conditions are met:
+      
+      1. Redistributions of source code must retain the above copyright notice, this
+         list of conditions and the following disclaimer.
+      
+      2. Redistributions in binary form must reproduce the above copyright notice,
+         this list of conditions and the following disclaimer in the documentation
+         and/or other materials provided with the distribution.
+      
+      3. Neither the name of the copyright holder nor the names of its contributors
+         may be used to endorse or promote products derived from this software without
+         specific prior written permission.
+      
+      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+      ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+      WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+      DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+      FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+      DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+      SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+      CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+      OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      ''
+  }
+, { name =
+      "conduit"
+  , author =
+      "Michael Snoyman"
+  , license =
+      ''
+      Copyright 2012 Michael Snoyman
+      
+      Permission is hereby granted, free of charge, to any person obtaining a copy of
+      this software and associated documentation files (the "Software"), to deal in
+      the Software without restriction, including without limitation the rights to
+      use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+      of the Software, and to permit persons to whom the Software is furnished to do
+      so, subject to the following conditions:
+      
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+      
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
+      ''
+  }
+, { name =
+      "async"
+  , author =
+      "Simon Marlow"
+  , license =
+      ''
+      Copyright 2012 Simon Marlow
+      
+      Redistribution and use in source and binary forms, with or without
+      modification, are permitted provided that the following conditions are met:
+      
+      1. Redistributions of source code must retain the above copyright notice, this
+         list of conditions and the following disclaimer.
+      
+      2. Redistributions in binary form must reproduce the above copyright notice,
+         this list of conditions and the following disclaimer in the documentation
+         and/or other materials provided with the distribution.
+      
+      3. Neither the name of the copyright holder nor the names of its contributors
+         may be used to endorse or promote products derived from this software without
+         specific prior written permission.
+      
+      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+      ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+      WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+      DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+      FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+      DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+      SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+      CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+      OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      ''
+  }
+, { name =
+      "system-filepath"
+  , author =
+      "John Milikin"
+  , license =
+      ''
+      Copyright 2010 John Milikin
+      
+      Permission is hereby granted, free of charge, to any person obtaining a copy of
+      this software and associated documentation files (the "Software"), to deal in
+      the Software without restriction, including without limitation the rights to
+      use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+      of the Software, and to permit persons to whom the Software is furnished to do
+      so, subject to the following conditions:
+      
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+      
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
+      ''
+  }
 ]
 ```
 
@@ -254,54 +266,66 @@ We could add comments with the name of each license (since Dhall, unlike JSON,
 supports comments):
 
 ```haskell
-[   {   name    = "dhall"
-    ,   author  = "Gabriel Gonzalez"
+[ { name =
+      "dhall"
+  , author =
+      "Gabriel Gonzalez"
 
-        -- BSD 3-Clause
-    ,   license = ''
-            Copyright 2017 Gabriel Gonzalez
+    -- BSD 3-Clause
+  , license =
+      ''
+      Copyright 2017 Gabriel Gonzalez
 
-            Redistribution and use in source and binary forms, with or without
-            ...
-            OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        ''
-    }
-,   {   name    = "conduit"
-    ,   author  = "Michael Snoyman"
+      Redistribution and use in source and binary forms, with or without
+      ...
+      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      ''
+  }
+, { name =
+      "conduit"
+  , author =
+      "Michael Snoyman"
 
-        -- MIT
-    ,   license = ''
-            Copyright 2012 Michael Snoyman
+    -- MIT
+  , license =
+      ''
+      Copyright 2012 Michael Snoyman
 
-            Permission is hereby granted, free of charge, to any person obtaining a copy of
-            ...
-            SOFTWARE.
-        ''
-    }
-,   {   name    = "async"
-    ,   author  = "Simon Marlow"
+      Permission is hereby granted, free of charge, to any person obtaining a copy of
+      ...
+      SOFTWARE.
+      ''
+  }
+, { name =
+      "async"
+  , author =
+      "Simon Marlow"
 
-        -- BSD 3-Clause
-    ,   license = ''
-            Copyright 2012 Simon Marlow
+    -- BSD 3-Clause
+  , license =
+      ''
+      Copyright 2012 Simon Marlow
 
-            Redistribution and use in source and binary forms, with or without
-            ...
-            OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        ''
-    }
-,   {   name    = "system-filepath"
-    ,   author  = "John Milikin"
+      Redistribution and use in source and binary forms, with or without
+      ...
+      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      ''
+  }
+, { name =
+      "system-filepath"
+  , author =
+      "John Milikin"
 
-        -- MIT
-    ,   license = ''
-            Copyright 2010 John Milikin
+    -- MIT
+  , license =
+      ''
+      Copyright 2010 John Milikin
 
-            Permission is hereby granted, free of charge, to any person obtaining a copy of
-            ...
-            SOFTWARE.
-        ''
-    }
+      Permission is hereby granted, free of charge, to any person obtaining a copy of
+      ...
+      SOFTWARE.
+      ''
+  }
 ]
 ```
 
@@ -310,73 +334,89 @@ supports comments):
 ```haskell
 -- example1.dhall
 
-    let BSD-3-Clause = λ(args : { year : Natural, author : Text }) → ''
-            Copyright ${Natural/show args.year} ${args.author}
-
-            Redistribution and use in source and binary forms, with or without
-            modification, are permitted provided that the following conditions are met:
-
-            1. Redistributions of source code must retain the above copyright notice, this
-               list of conditions and the following disclaimer.
-
-            2. Redistributions in binary form must reproduce the above copyright notice,
-               this list of conditions and the following disclaimer in the documentation
-               and/or other materials provided with the distribution.
-
-            3. Neither the name of the copyright holder nor the names of its contributors
-               may be used to endorse or promote products derived from this software without
-               specific prior written permission.
-
-            THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-            ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-            WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-            DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-            FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-            DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-            SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-            CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-            OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-            OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+let BSD-3-Clause =
+        λ(args : { year : Natural, author : Text })
+      → ''
+        Copyright ${Natural/show args.year} ${args.author}
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this
+           list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        3. Neither the name of the copyright holder nor the names of its contributors
+           may be used to endorse or promote products derived from this software without
+           specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ''
 
-in  let MIT = λ(args : { year : Natural, author : Text }) → ''
-            Copyright ${Natural/show args.year} ${args.author}
-
-            Permission is hereby granted, free of charge, to any person obtaining a copy of
-            this software and associated documentation files (the "Software"), to deal in
-            the Software without restriction, including without limitation the rights to
-            use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-            of the Software, and to permit persons to whom the Software is furnished to do
-            so, subject to the following conditions:
-
-            The above copyright notice and this permission notice shall be included in all
-            copies or substantial portions of the Software.
-
-            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-            SOFTWARE.
+let MIT =
+        λ(args : { year : Natural, author : Text })
+      → ''
+        Copyright ${Natural/show args.year} ${args.author}
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy of
+        this software and associated documentation files (the "Software"), to deal in
+        the Software without restriction, including without limitation the rights to
+        use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+        of the Software, and to permit persons to whom the Software is furnished to do
+        so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
         ''
 
-in  [   {   name    = "dhall"
-        ,   author  = "Gabriel Gonzalez"
-        ,   license = BSD-3-Clause { year = 2017, author = "Gabriel Gonzalez" }
-        }
-    ,   {   name    = "conduit"
-        ,   author  = "Michael Snoyman"
-        ,   license = MIT { year = 2012, author = "Michael Snoyman" }
-        }
-    ,   {   name    = "async"
-        ,   author  = "Simon Marlow"
-        ,   license = BSD-3-Clause { year = 2012, author = "Simon Marlow" }
-        }
-    ,   {   name    = "system-filepath"
-        ,   author  = "John Milikin"
-        ,   license = MIT { year = 2010, author = "John Milikin" }
-        }
+in  [ { name =
+          "dhall"
+      , author =
+          "Gabriel Gonzalez"
+      , license =
+          BSD-3-Clause { year = 2017, author = "Gabriel Gonzalez" }
+      }
+    , { name =
+          "conduit"
+      , author =
+          "Michael Snoyman"
+      , license =
+          MIT { year = 2012, author = "Michael Snoyman" }
+      }
+    , { name =
+          "async"
+      , author =
+          "Simon Marlow"
+      , license =
+          BSD-3-Clause { year = 2012, author = "Simon Marlow" }
+      }
+    , { name =
+          "system-filepath"
+      , author =
+          "John Milikin"
+      , license =
+          MIT { year = 2010, author = "John Milikin" }
+      }
     ]
 ```
 
@@ -430,60 +470,62 @@ files, like this:
 ```haskell
 -- BSD-3-Clause.dhall
 
-λ(args : { year : Natural, author : Text }) → ''
-    Copyright ${Natural/show args.year} ${args.author}
-
-    Redistribution and use in source and binary forms, with or without
-    modification, are permitted provided that the following conditions are met:
-
-    1. Redistributions of source code must retain the above copyright notice, this
-       list of conditions and the following disclaimer.
-
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
-       and/or other materials provided with the distribution.
-
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
-       specific prior written permission.
-
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-''
+  λ(args : { year : Natural, author : Text })
+→ ''
+  Copyright ${Natural/show args.year} ${args.author}
+  
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice, this
+     list of conditions and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors
+     may be used to endorse or promote products derived from this software without
+     specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ''
 ```
 
 ```haskell
 -- MIT.dhall
 
-λ(args : { year : Natural, author : Text }) → ''
-    Copyright ${Natural/show args.year} ${args.author}
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy of
-    this software and associated documentation files (the "Software"), to deal in
-    the Software without restriction, including without limitation the rights to
-    use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-    of the Software, and to permit persons to whom the Software is furnished to do
-    so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
-''
+  λ(args : { year : Natural, author : Text })
+→ ''
+  Copyright ${Natural/show args.year} ${args.author}
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal in
+  the Software without restriction, including without limitation the rights to
+  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+  of the Software, and to permit persons to whom the Software is furnished to do
+  so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  ''
 ```
 
 ... and then refer to these files within our original configuration:
@@ -491,22 +533,34 @@ files, like this:
 ```haskell
 -- example2.dhall
 
-[   {   name    = "dhall"
-    ,   author  = "Gabriel Gonzalez"
-    ,   license = ./BSD-3-Clause.dhall { year = 2017, author = "Gabriel Gonzalez" }
-    }
-,   {   name    = "conduit"
-    ,   author  = "Michael Snoyman"
-    ,   license = ./MIT.dhall { year = 2012, author = "Michael Snoyman" }
-    }
-,   {   name    = "async"
-    ,   author  = "Simon Marlow"
-    ,   license = ./BSD-3-Clause.dhall { year = 2012, author = "Simon Marlow" }
-    }
-,   {   name    = "system-filepath"
-    ,   author  = "John Milikin"
-    ,   license = ./MIT.dhall { year = 2010, author = "John Milikin" }
-    }
+[ { name =
+      "dhall"
+  , author =
+      "Gabriel Gonzalez"
+  , license =
+      ./BSD-3-Clause.dhall { year = 2017, author = "Gabriel Gonzalez" }
+  }
+, { name =
+      "conduit"
+  , author =
+      "Michael Snoyman"
+  , license =
+      ./MIT.dhall { year = 2012, author = "Michael Snoyman" }
+  }
+, { name =
+      "async"
+  , author =
+      "Simon Marlow"
+  , license =
+      ./BSD-3-Clause.dhall { year = 2012, author = "Simon Marlow" }
+  }
+, { name =
+      "system-filepath"
+  , author =
+      "John Milikin"
+  , license =
+      ./MIT.dhall { year = 2010, author = "John Milikin" }
+  }
 ]
 ```
 
@@ -523,38 +577,66 @@ We can automate that away, too:
 ```haskell
 -- example3.dhall
 
-    let makePackage =
-        λ(args : {   name        : Text
-                 ,   author      : Text
-                 ,   year        : Natural
-                 ,   makeLicense : { year : Natural, author : Text } → Text
-                 }
-        )
-    →   {   name    = args.name
-        ,   author  = args.author
-        ,   license = args.makeLicense { year = args.year, author = args.author }
+let makePackage =
+        λ ( args
+          : { name :
+                Text
+            , author :
+                Text
+            , year :
+                Natural
+            , makeLicense :
+                { year : Natural, author : Text } → Text
+            }
+          )
+      → { name =
+            args.name
+        , author =
+            args.author
+        , license =
+            args.makeLicense { year = args.year, author = args.author }
         }
 
-in  [   makePackage {   name        = "dhall"
-                    ,   author      = "Gabriel Gonzalez"
-                    ,   year        = 2017
-                    ,   makeLicense = ./BSD-3-Clause.dhall
-                    }
-    ,   makePackage {   name        = "conduit"
-                    ,   author      = "Michael Snoyman"
-                    ,   year        = 2012
-                    ,   makeLicense = ./MIT.dhall
-                    }
-    ,   makePackage {   name        = "async"
-                    ,   author      = "Simon Marlow"
-                    ,   year        = 2012
-                    ,   makeLicense = ./BSD-3-Clause.dhall
-                    }
-    ,   makePackage {   name        = "system-filepath"
-                    ,   author      = "John Milikin"
-                    ,   year        = 2010
-                    ,   makeLicense = ./MIT.dhall
-                    }
+in  [ makePackage
+      { name =
+          "dhall"
+      , author =
+          "Gabriel Gonzalez"
+      , year =
+          2017
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , makePackage
+      { name =
+          "conduit"
+      , author =
+          "Michael Snoyman"
+      , year =
+          2012
+      , makeLicense =
+          ./MIT.dhall
+      }
+    , makePackage
+      { name =
+          "async"
+      , author =
+          "Simon Marlow"
+      , year =
+          2012
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , makePackage
+      { name =
+          "system-filepath"
+      , author =
+          "John Milikin"
+      , year =
+          2010
+      , makeLicense =
+          ./MIT.dhall
+      }
     ]
 ```
 
@@ -570,55 +652,76 @@ with the same function (such as `makePackage`):
 ```haskell
 -- example4.dhall
 
-    let map = https://raw.githubusercontent.com/dhall-lang/Prelude/35deff0d41f2bf86c42089c6ca16665537f54d75/List/map
+let map = https://prelude.dhall-lang.org/List/map
 
-in  let makePackage =
-        λ(args : {   name        : Text
-                 ,   author      : Text
-                 ,   year        : Natural
-                 ,   makeLicense : { year : Natural, author : Text } → Text
-                 }
-        )
-    →   {   name    = args.name
-        ,   author  = args.author
-        ,   license = args.makeLicense { year = args.year, author = args.author }
+let makePackage =
+        λ ( args
+          : { name :
+                Text
+            , author :
+                Text
+            , year :
+                Natural
+            , makeLicense :
+                { year : Natural, author : Text } → Text
+            }
+          )
+      → { name =
+            args.name
+        , author =
+            args.author
+        , license =
+            args.makeLicense { year = args.year, author = args.author }
         }
 
 in  map
-
-    {   name        : Text
-    ,   author      : Text
-    ,   year        : Natural
-    ,   makeLicense : { year : Natural, author : Text } → Text
+    { name :
+        Text
+    , author :
+        Text
+    , year :
+        Natural
+    , makeLicense :
+        { year : Natural, author : Text } → Text
     }
-
-    {   name    : Text
-    ,   author  : Text
-    ,   license : Text
-    }
-
+    { name : Text, author : Text, license : Text }
     makePackage
-
-    [   {   name        = "dhall"
-        ,   author      = "Gabriel Gonzalez"
-        ,   year        = 2017
-        ,   makeLicense = ./BSD-3-Clause.dhall
-        }
-    ,   {   name        = "conduit"
-        ,   author      = "Michael Snoyman"
-        ,   year        = 2012
-        ,   makeLicense = ./MIT.dhall
-        }
-    ,   {   name        = "async"
-        ,   author      = "Simon Marlow"
-        ,   year        = 2012
-        ,   makeLicense = ./BSD-3-Clause.dhall
-        }
-    ,   {   name        = "system-filepath"
-        ,   author      = "John Milikin"
-        ,   year        = 2010
-        ,   makeLicense = ./MIT.dhall
-        }
+    [ { name =
+          "dhall"
+      , author =
+          "Gabriel Gonzalez"
+      , year =
+          2017
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , { name =
+          "conduit"
+      , author =
+          "Michael Snoyman"
+      , year =
+          2012
+      , makeLicense =
+          ./MIT.dhall
+      }
+    , { name =
+          "async"
+      , author =
+          "Simon Marlow"
+      , year =
+          2012
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , { name =
+          "system-filepath"
+      , author =
+          "John Milikin"
+      , year =
+          2010
+      , makeLicense =
+          ./MIT.dhall
+      }
     ]
 ```
 
@@ -629,29 +732,32 @@ Every function from the Prelude has documentation, examples, and a type
 signature:
 
 ```bash
-$ curl https://raw.githubusercontent.com/dhall-lang/Prelude/35deff0d41f2bf86c42089c6ca16665537f54d75/List/map
+$ curl --location https://prelude.dhall-lang.org/List/map
 {-
-Tranform a list by applying a function to each element
+Transform a list by applying a function to each element
 
 Examples:
 
-./map Natural Bool Natural/even ([2, 3, 5] : List Natural)
-= [True, False, False] : List Bool
+
+./map Natural Bool Natural/even [ 2, 3, 5 ]
+= [ True, False, False ]
 
 ./map Natural Bool Natural/even ([] : List Natural)
 = [] : List Bool
+
 -}
-let map : ∀(a : Type) → ∀(b : Type) → (a → b) → List a → List b
-    =   λ(a : Type)
-    →   λ(b : Type)
-    →   λ(f : a → b)
-    →   λ(xs : List a)
-    →   List/build
-        b
-        (   λ(list : Type)
-        →   λ(cons : b → list → list)
-        →   List/fold a xs list (λ(x : a) → cons (f x))
-        )
+    let map
+        : ∀(a : Type) → ∀(b : Type) → (a → b) → List a → List b
+        =   λ(a : Type)
+          → λ(b : Type)
+          → λ(f : a → b)
+          → λ(xs : List a)
+          → List/build
+            b
+            (   λ(list : Type)
+              → λ(cons : b → list → list)
+              → List/fold a xs list (λ(x : a) → cons (f x))
+            )
 
 in  map
 ```
@@ -697,50 +803,72 @@ You can use `let` expressions to define "type synonyms":
 ```haskell
 -- example5.dhall
 
-    let map = https://raw.githubusercontent.com/dhall-lang/Prelude/35deff0d41f2bf86c42089c6ca16665537f54d75/List/map
+let map =
+      https://prelude.dhall-lang.org/List/map
 
-in  let Input =
-          {   name        : Text
-          ,   author      : Text
-          ,   year        : Natural
-          ,   makeLicense : { year : Natural, author : Text } → Text
-          }
+let Input =
+      { name :
+          Text
+      , author :
+          Text
+      , year :
+          Natural
+      , makeLicense :
+          { year : Natural, author : Text } → Text
+      }
 
-in  let Output =
-          {   name    : Text
-          ,   author  : Text
-          ,   license : Text
-          }
+let Output = { name : Text, author : Text, license : Text }
 
-in  let makePackage =
+let makePackage =
         λ(args : Input)
-    →   {   name    = args.name
-        ,   author  = args.author
-        ,   license = args.makeLicense { year = args.year, author = args.author }
+      → { name =
+            args.name
+        , author =
+            args.author
+        , license =
+            args.makeLicense { year = args.year, author = args.author }
         }
 
-in  map Input Output makePackage
-
-    [   {   name        = "dhall"
-        ,   author      = "Gabriel Gonzalez"
-        ,   year        = 2017
-        ,   makeLicense = ./BSD-3-Clause.dhall
-        }
-    ,   {   name        = "conduit"
-        ,   author      = "Michael Snoyman"
-        ,   year        = 2012
-        ,   makeLicense = ./MIT.dhall
-        }
-    ,   {   name        = "async"
-        ,   author      = "Simon Marlow"
-        ,   year        = 2012
-        ,   makeLicense = ./BSD-3-Clause.dhall
-        }
-    ,   {   name        = "system-filepath"
-        ,   author      = "John Milikin"
-        ,   year        = 2010
-        ,   makeLicense = ./MIT.dhall
-        }
+in  map
+    Input
+    Output
+    makePackage
+    [ { name =
+          "dhall"
+      , author =
+          "Gabriel Gonzalez"
+      , year =
+          2017
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , { name =
+          "conduit"
+      , author =
+          "Michael Snoyman"
+      , year =
+          2012
+      , makeLicense =
+          ./MIT.dhall
+      }
+    , { name =
+          "async"
+      , author =
+          "Simon Marlow"
+      , year =
+          2012
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , { name =
+          "system-filepath"
+      , author =
+          "John Milikin"
+      , year =
+          2010
+      , makeLicense =
+          ./MIT.dhall
+      }
     ]
 ```
 
@@ -748,57 +876,79 @@ in  map Input Output makePackage
 
 ```haskell
 -- Input.dhall
-{   name        : Text
-,   author      : Text
-,   year        : Natural
-,   makeLicense : { year : Natural, author : Text } → Text
+{ name :
+    Text
+, author :
+    Text
+, year :
+    Natural
+, makeLicense :
+    { year : Natural, author : Text } → Text
 }
 ```
 
 ```haskell
 -- Output.dhall
-{   name    : Text
-,   author  : Text
-,   license : Text
-}
+{ name : Text, author : Text, license : Text }
 ```
 
 ... and import those types like any other Dhall expression:
 
 ```haskell
--- example5.dhall
+-- example6.dhall
 
-    let map = https://raw.githubusercontent.com/dhall-lang/Prelude/35deff0d41f2bf86c42089c6ca16665537f54d75/List/map
+let map = https://prelude.dhall-lang.org/List/map
 
-in  let makePackage =
+let makePackage =
         λ(args : ./Input.dhall)
-    →   {   name    = args.name
-        ,   author  = args.author
-        ,   license = args.makeLicense { year = args.year, author = args.author }
+      → { name =
+            args.name
+        , author =
+            args.author
+        , license =
+            args.makeLicense { year = args.year, author = args.author }
         }
 
-in  map ./Input.dhall ./Output.dhall makePackage
-
-    [   {   name        = "dhall"
-        ,   author      = "Gabriel Gonzalez"
-        ,   year        = 2017
-        ,   makeLicense = ./BSD-3-Clause.dhall
-        }
-    ,   {   name        = "conduit"
-        ,   author      = "Michael Snoyman"
-        ,   year        = 2012
-        ,   makeLicense = ./MIT.dhall
-        }
-    ,   {   name        = "async"
-        ,   author      = "Simon Marlow"
-        ,   year        = 2012
-        ,   makeLicense = ./BSD-3-Clause.dhall
-        }
-    ,   {   name        = "system-filepath"
-        ,   author      = "John Milikin"
-        ,   year        = 2010
-        ,   makeLicense = ./MIT.dhall
-        }
+in  map
+    ./Input.dhall
+    ./Output.dhall
+    makePackage
+    [ { name =
+          "dhall"
+      , author =
+          "Gabriel Gonzalez"
+      , year =
+          2017
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , { name =
+          "conduit"
+      , author =
+          "Michael Snoyman"
+      , year =
+          2012
+      , makeLicense =
+          ./MIT.dhall
+      }
+    , { name =
+          "async"
+      , author =
+          "Simon Marlow"
+      , year =
+          2012
+      , makeLicense =
+          ./BSD-3-Clause.dhall
+      }
+    , { name =
+          "system-filepath"
+      , author =
+          "John Milikin"
+      , year =
+          2010
+      , makeLicense =
+          ./MIT.dhall
+      }
     ]
 ```
 
@@ -812,50 +962,60 @@ JSON isn't the only file format that Dhall supports.  For example, we can
 convert our Dhall configuration to YAML:
 
 ```bash
-$ dhall-to-yaml <<< '/tmp/test/example3'
+$ dhall-to-yaml <<< './example6.dhall' 
 - name: dhall
   author: Gabriel Gonzalez
-  license: ! '
+  license: |
     Copyright 2017 Gabriel Gonzalez
 
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
 
-    Redistribution and use in source and binary forms, with or without modification,
-    ...
-    OF THE POSSIBILITY OF SUCH DAMAGE.
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
 
-'
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - name: conduit
   author: Michael Snoyman
-  license: ! '
+  license: |
     Copyright 2012 Michael Snoyman
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of
-    ...
-    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-'
+    …
+    SOFTWARE.
 - name: async
   author: Simon Marlow
-  license: ! '
+  license: |
     Copyright 2012 Simon Marlow
 
-    Redistribution and use in source and binary forms, with or without modification,
-    ...
-    OF THE POSSIBILITY OF SUCH DAMAGE.
-
-'
+    Redistribution and use in source and binary forms, with or without
+    …
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - name: system-filepath
   author: John Milikin
-  license: ! '
-
+  license: |
     Copyright 2010 John Milikin
 
-
     Permission is hereby granted, free of charge, to any person obtaining a copy of
-    ...
-    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-'
+    …
+    SOFTWARE.
 ```
 
 ... or read our Dhall configuration directly into some programming languages
