@@ -49,33 +49,37 @@ The equivalent Dhall code would be:
 ```haskell
 -- example0.dhall
 
-    let Person : Type =
-            ∀(Person : Type)
-          → ∀(MakePerson : { children : List Person, name : Text } → Person)
-          → Person
+let Person
+    : Type
+    =   ∀(Person : Type)
+      → ∀(MakePerson : { children : List Person, name : Text } → Person)
+      → Person
 
-in  let example : Person =
-            λ(Person : Type)
-          → λ(MakePerson : { children : List Person, name : Text } → Person)
-          → MakePerson
-            { children =
-                [ MakePerson { children = [] : List Person, name = "Mary" }
-                , MakePerson { children = [] : List Person, name = "Jane" }
-                ]
-            , name     = "John"
-            }
+let example
+    : Person
+    =   λ(Person : Type)
+      → λ(MakePerson : { children : List Person, name : Text } → Person)
+      → MakePerson
+        { children =
+            [ MakePerson { children = [] : List Person, name = "Mary" }
+            , MakePerson { children = [] : List Person, name = "Jane" }
+            ]
+        , name =
+            "John"
+        }
 
-in  let everybody : Person → List Text =
-              let concat = http://prelude.dhall-lang.org/List/concat 
-          
-          in    λ(x : Person)
-              → x
-                (List Text)
-                (   λ(p : { children : List (List Text), name : Text })
-                  → [ p.name ] # concat Text p.children
-                )
+let everybody
+    : Person → List Text
+    = let concat = http://prelude.dhall-lang.org/List/concat
+      
+      in    λ(x : Person)
+          → x
+            (List Text)
+            (   λ(p : { children : List (List Text), name : Text })
+              → [ p.name ] # concat Text p.children
+            )
 
-in  let result : List Text = everybody example
+let result : List Text = everybody example
 
 in  result
 ```
@@ -94,33 +98,37 @@ above example.  We can disambiguate them by prefixing some of them with an
 underscore (i.e. `_Person`):
 
 ```haskell
-    let Person : Type =
-            ∀(_Person : Type)
-          → ∀(MakePerson : { children : List _Person, name : Text } → _Person)
-          → _Person
+let Person
+    : Type
+    =   ∀(_Person : Type)
+      → ∀(MakePerson : { children : List _Person, name : Text } → _Person)
+      → _Person
 
-in  let example : Person =
-            λ(_Person : Type)
-          → λ(MakePerson : { children : List _Person, name : Text } → _Person)
-          → MakePerson
-            { children =
-                [ MakePerson { children = [] : List _Person, name = "Mary" }
-                , MakePerson { children = [] : List _Person, name = "Jane" }
-                ]
-            , name     = "John"
-            }
+let example
+    : Person
+    =   λ(_Person : Type)
+      → λ(MakePerson : { children : List _Person, name : Text } → _Person)
+      → MakePerson
+        { children =
+            [ MakePerson { children = [] : List _Person, name = "Mary" }
+            , MakePerson { children = [] : List _Person, name = "Jane" }
+            ]
+        , name =
+            "John"
+        }
 
-in  let everybody : Person → List Text =
-              let concat = http://prelude.dhall-lang.org/List/concat 
-          
-          in    λ(x : Person)
-              → x
-                (List Text)
-                (   λ(p : { children : List (List Text), name : Text })
-                  → [ p.name ] # concat Text p.children
-                )
+let everybody
+    : Person → List Text
+    = let concat = http://prelude.dhall-lang.org/List/concat
+      
+      in    λ(x : Person)
+          → x
+            (List Text)
+            (   λ(p : { children : List (List Text), name : Text })
+              → [ p.name ] # concat Text p.children
+            )
 
-in  let result : List Text = everybody example
+let result : List Text = everybody example
 
 in  result
 ```
@@ -141,23 +149,24 @@ performing substitution.  In this specific case, `everybody` is:
 this:
 
 ```haskell
-    let concat = http://prelude.dhall-lang.org/List/concat 
+let concat = http://prelude.dhall-lang.org/List/concat
 
-in  let Person : Type = List Text
+let Person : Type = List Text
 
-in  let MakePerson
-        : { children : List Person, name : Text } → Person
-        =   λ(p : { children : List Person, name : Text })
-          → [ p.name ] # concat Text p.children
+let MakePerson
+    : { children : List Person, name : Text } → Person
+    =   λ(p : { children : List Person, name : Text })
+      → [ p.name ] # concat Text p.children
 
-in  let result =
-          MakePerson
-          { children =
-              [ MakePerson { children = [] : List Person, name = "Mary" }
-              , MakePerson { children = [] : List Person, name = "Jane" }
-              ]
-          , name     = "John"
-          }
+let result =
+      MakePerson
+      { children =
+          [ MakePerson { children = [] : List Person, name = "Mary" }
+          , MakePerson { children = [] : List Person, name = "Jane" }
+          ]
+      , name =
+          "John"
+      }
 
 in  result
 ```
@@ -199,20 +208,20 @@ $ ghci Example1.hs
 ```haskell
 -- example1.dhall
 
-    let Nat : Type = ∀(Nat : Type) → ∀(Zero : Nat) → ∀(Succ : Nat → Nat) → Nat
+let Nat : Type = ∀(Nat : Type) → ∀(Zero : Nat) → ∀(Succ : Nat → Nat) → Nat
 
-in  let example
-        : Nat
-        =   λ(Nat : Type)
-          → λ(Zero : Nat)
-          → λ(Succ : Nat → Nat)
-          → Succ (Succ (Succ Zero))
+let example
+    : Nat
+    =   λ(Nat : Type)
+      → λ(Zero : Nat)
+      → λ(Succ : Nat → Nat)
+      → Succ (Succ (Succ Zero))
 
-in  let toNatural
-        : Nat → Natural
-        = λ(x : Nat) → x Natural 0 (λ(n : Natural) → 1 + n)
+let toNatural
+    : Nat → Natural
+    = λ(x : Nat) → x Natural 0 (λ(n : Natural) → 1 + n)
 
-in  let result : Natural = toNatural example
+let result : Natural = toNatural example
 
 in  result
 ```
@@ -235,13 +244,13 @@ Like before, our recursive `toNatural` function is performing substitution by:
 ... which means that we could have equivalently written:
 
 ```haskell
-    let Nat = Natural
+let Nat = Natural
 
-in  let Zero : Nat = 0
+let Zero : Nat = 0
 
-in  let Succ : Nat → Nat = λ(n : Nat) → 1 + n
+let Succ : Nat → Nat = λ(n : Nat) → 1 + n
 
-in  let result : Nat = Succ (Succ (Succ Zero))
+let result : Nat = Succ (Succ (Succ Zero))
 
 in  result
 ```
@@ -285,35 +294,30 @@ $ ghci Example2.hs
 ... corresponds to this Dhall code:
 
 ```haskell
-    let Odd
-        : Type
-        =   ∀(Even : Type)
-          → ∀(Odd : Type)
-          → ∀(Zero : Even)
-          → ∀(SuccEven : Odd → Even)
-          → ∀(SuccOdd : Even → Odd)
-          → Odd
+let Odd
+    : Type
+    =   ∀(Even : Type)
+      → ∀(Odd : Type)
+      → ∀(Zero : Even)
+      → ∀(SuccEven : Odd → Even)
+      → ∀(SuccOdd : Even → Odd)
+      → Odd
 
-in  let example
-        : Odd
-        =   λ(Even : Type)
-          → λ(Odd : Type)
-          → λ(Zero : Even)
-          → λ(SuccEven : Odd → Even)
-          → λ(SuccOdd : Even → Odd)
-          → SuccOdd (SuccEven (SuccOdd Zero))
+let example
+    : Odd
+    =   λ(Even : Type)
+      → λ(Odd : Type)
+      → λ(Zero : Even)
+      → λ(SuccEven : Odd → Even)
+      → λ(SuccOdd : Even → Odd)
+      → SuccOdd (SuccEven (SuccOdd Zero))
 
-in  let oddToNatural
-        : Odd → Natural
-        =   λ(o : Odd)
-          → o
-            Natural
-            Natural
-            0
-            (λ(n : Natural) → 1 + n)
-            (λ(n : Natural) → 1 + n)
+let oddToNatural
+    : Odd → Natural
+    =   λ(o : Odd)
+      → o Natural Natural 0 (λ(n : Natural) → 1 + n) (λ(n : Natural) → 1 + n)
 
-in  let result = oddToNatural example
+let result = oddToNatural example
 
 in  result
 ```
@@ -345,17 +349,17 @@ by:
 ... which means that we could have equivalently written:
 
 ```haskell
-    let Odd : Type = Natural
+let Odd : Type = Natural
 
-in  let Even : Type = Natural
+let Even : Type = Natural
 
-in  let Zero : Even = 0
+let Zero : Even = 0
 
-in  let SuccEven : Odd → Even = λ(n : Odd) → 1 + n
+let SuccEven : Odd → Even = λ(n : Odd) → 1 + n
 
-in  let SuccOdd : Even → Odd = λ(n : Even) → 1 + n
+let SuccOdd : Even → Odd = λ(n : Even) → 1 + n
 
-in  let result = SuccOdd (SuccEven (SuccOdd Zero))
+let result = SuccOdd (SuccEven (SuccOdd Zero))
 
 in  result
 ```
