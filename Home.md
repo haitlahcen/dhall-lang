@@ -76,7 +76,7 @@ These comprehensive resources cover details that other texts will gloss over:
 
     A list of all available built-in functionality
 
-*   [Prelude](http://prelude.dhall-lang.org/)
+*   [Prelude](https://prelude.dhall-lang.org/)
 
     The latest release of the Dhall Prelude
 
