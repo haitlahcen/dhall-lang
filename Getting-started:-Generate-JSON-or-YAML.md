@@ -666,7 +666,7 @@ JSON.  For example, you can make the `y` field `Optional` (i.e. the Dhall
 equivalent of a nullable value), like this:
 
 ```haskell
--- optional.dhall
+-- ./optional.dhall
 
 [ { x = 1, y = [] : Optional Natural }
 , { x = 2, y = [ 3 ] : Optional Natural }
@@ -727,7 +727,7 @@ possible types.
 For example, the equivalent Dhall configuration would be:
 
 ```haskell
--- union.dhall
+-- ./union.dhall
 
 let Element = < Left : Natural | Right : Bool >
 
@@ -756,7 +756,7 @@ Here is a more sophisticated example showcasing how each union alternative
 can be a record with different fields present:
 
 ```haskell
--- package.dhall
+-- ./package.dhall
 
 let Package =
       < Local :
@@ -846,7 +846,7 @@ The idiomatic way to encode the above information in Dhall is to use an "associa
 list" (i.e. a list of key-value pairs), like this:
 
 ```haskell
--- students.dhall
+-- ./students.dhall
 
 [ { mapKey = "daniel", mapValue = { age = 17 } }
 , { mapKey = "rebecca", mapValue = { age = 17 } }
