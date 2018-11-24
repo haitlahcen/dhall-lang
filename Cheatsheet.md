@@ -186,10 +186,10 @@
 
     λ(inputArgument : inputType) → outputResult : ∀(inputArgument : inputType) → outputType  -- Unicode syntax
 
-        let describe =
-            λ(name : Text)
-          → λ(age : Natural)
-          → "Name: ${name}, Age: ${Natural/show age}"
+    let describe =
+        λ(name : Text)
+      → λ(age : Natural)
+      → "Name: ${name}, Age: ${Natural/show age}"
 
     in  describe "John Doe" 21 = "Name: John Doe, Age: 21"
     ```
