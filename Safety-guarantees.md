@@ -462,8 +462,8 @@ specifying what do to if the value is absent, typically by using
 
 ```haskell
   λ(o : Optional Natural)
-      -- Default `x` to `0` if `x` is absent
-→     let x = Optional/fold Natural o Natural (λ(n : Natural) → n) 0
+  -- Default `x` to `0` if `x` is absent
+→ let x = Optional/fold Natural o Natural (λ(n : Natural) → n) 0
 
   in  x + 3
 ```
