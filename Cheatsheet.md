@@ -210,6 +210,47 @@
     [ ./you/can/import/paths, https://example.com/you/can/import/urls ] : ./even/for/types
     ```
 
+    Adding `as Text` imports the contents of the import as a `Text` value instead of a
+    Dhall expression:
+
+    ```bash
+    $ dhall <<< 'https://prelude.dhall-lang.org/Bool/not'
+    ```
+    ```haskell
+    λ(b : Bool) → b == False
+    ```
+    ```bash
+    $ dhall <<< 'https://prelude.dhall-lang.org/Bool/not as Text'
+    ```
+    ```haskell
+    ''
+    {-
+    Flip the value of a `Bool`
+
+    Examples:
+
+    ./not True = False
+
+    ./not False = True
+    -}
+    let not : Bool → Bool = λ(b : Bool) → b == False in not
+    ''
+    ```
+
+    You can specify a fallback expression if the import fails using `?`
+
+    This fallback expression can contain another import:
+
+    ```haskell
+    https://prelude.dhall-lang.org/package.dhall ? ./Prelude/package.dhall
+    ```
+
+    ... or even be a pure value:
+
+    ```haskell
+    Some (env:HOME as Text) ? None Text
+    ```
+
 *   Prelude
 
     You can find latest Prelude of importable functions at https://prelude.dhall-lang.org/
