@@ -5,6 +5,7 @@
     * [[Dhall in production|Dhall in production]]
 * Tutorials
     * [[Getting started: Generate JSON or YAML|Getting started: Generate JSON or YAML]]
+    * [`dhall-nethack`](https://github.com/dhall-lang/dhall-nethack)
 * How-to guides
     * [[Cheatsheet|Cheatsheet]]
     * [[Frequently Asked Questions (FAQ)|Frequently Asked Questions (FAQ)]]
