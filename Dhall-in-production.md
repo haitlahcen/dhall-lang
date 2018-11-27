@@ -16,6 +16,10 @@ Uses `dhall-haskell` to persist user configuration between command line interfac
 
 Uses Dhall to configure command-line applications (i.e. as an alternative to a JSON configuration)
 
+## [Formation](https://formation.ai/)
+
+Uses Dhall customized with additional built-ins as a serializable domain-specific language
+
 ## [IOHK](https://iohk.io/)
 
 Uses `dhall-to-yaml` to simplify redundant runtime configuration
