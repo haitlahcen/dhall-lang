@@ -28,6 +28,10 @@ Uses `dhall-to-yaml` to simplify redundant runtime configuration
 
 Uses `dhall-kubernetes`, `dhall-to-yaml` and `dhall-to-text` to configure, modularize and template Terraform and Kubernetes configurations
 
+## [Mira Networks](http://www.miranetworks.net)
+
+Uses `dhall-haskell` to define logs for parsing. The software generates a specific log parser in either Python, Haskell, Elm or Erlang.
+
 ## [NoRedInk](https://t.co/FTLTeyzykY)
 
 Uses `dhall` to configure their build process
