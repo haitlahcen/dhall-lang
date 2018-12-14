@@ -1,4 +1,4 @@
-This section covers confirmed uses of Dhall in production.  You can open an issue if you would like to list your company here:
+This section covers confirmed uses of Dhall in production.  You can open an issue if you would like to list your company or tool here:
 
 ## [AlasConnect](http://alasconnect.com/)
 
@@ -15,6 +15,10 @@ Uses `dhall-haskell` to persist user configuration between command line interfac
 ## [CircuitHub](https://circuithub.com/)
 
 Uses Dhall to configure command-line applications (i.e. as an alternative to a JSON configuration)
+
+## [Eta](https://eta-lang.org/)
+
+The Eta programming language supports Dhall for configuring their build tool, Etlas
 
 ## [Formation](https://formation.ai/)
 
