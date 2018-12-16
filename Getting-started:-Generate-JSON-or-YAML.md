@@ -150,26 +150,32 @@ $ dhall-to-yaml --help
 
 ## Smoke test
 
-Now you can test drive generating JSON from a Dhall expression.
+Now you can test drive generating JSON or YAML from a Dhall expression.
 
 The `dhall-to-json` executable takes a Dhall program on standard input and emits
 JSON to standard output.
 
-> **Exercise:** Try to guess what JSON the following command will output:
+> **Exercise:** Try to guess what either of the following commands will output:
 > 
 > ```bash
+> $ dhall-to-yaml <<< '{ foo = [1, 2, 3], bar = True }'
 > $ dhall-to-json <<< '{ foo = [1, 2, 3], bar = True }'
 > ```
 > 
-> ... then run the command to test your guess.
+> ... then run the commands to test your guess.
 
 > **Note:** `<<<` is a Bash operator that feeds the string on the right as
-> standard input to the command on the left.  The above command could have also
+> standard input to the command on the left.  The above commands could have also
 > been written as:
 > 
 > ```bash
 > $ echo '{ foo = [1, 2, 3], bar = True }' | dhall-to-json
+> $ echo '{ foo = [1, 2, 3], bar = True }' | dhall-to-yaml
 > ```
+
+To avoid repetition, we'll only use the `dhall-to-json` tool throughout the rest
+of this tutorial, although all of the following examples work equally well for
+the `dhall-to-yaml` tool.
 
 > **Exercise:** What Dhall expression generates the following JSON:
 >
