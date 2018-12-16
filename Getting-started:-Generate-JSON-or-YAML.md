@@ -31,7 +31,54 @@ You will need to install the `dhall-json` package, which provides both the
 provide recommended installation instructions for Windows, OS X, and Linux
 operating systems:
 
-### Install using Brew (OS X)
+### Windows - Install a prebuilt executable
+
+Install [Git for Windows](http://gitforwindows.org/), which
+includes Git Bash: a command line environment complete with Unix utilities.
+Run the following commands within a Git Bash shell.
+
+To install the latest stable release, visit the release page here:
+
+* [Releases - dhall-lang/dhall-haskell](https://github.com/dhall-lang/dhall-haskell/releases)
+
+... and download `dhall-json-X.Y.Z-x86_64-windows.zip` replacing `X.Y.Z` with
+the latest version of `dhall-json`.
+
+Navigate to the directory where you downloaded the ZIP file and unzip the file
+by running:
+
+```bash
+$ unzip dhall-json-*-x86_64-windows.zip
+```
+
+That will produce the following two files:
+
+* `./dhall-to-json.exe`
+* `./dhall-to-yaml.exe`
+
+Run the following commands (no `.exe` suffix necessary) to verify that
+the executables work:
+
+```bash
+$ ./dhall-to-json --help
+$ ./dhall-to-yaml --help
+```
+
+... and then copy those executables to `~/bin`:
+
+```
+$ cp ./dhall-to-{json,yaml} ~/bin
+```
+
+... and then run the following command to verify that the two
+executables are on your executable search `PATH`:
+
+```bash
+$ dhall-to-json --help
+$ dhall-to-yaml --help
+```
+
+### OS X - Install using Brew
 
 Run the following command to install the `dhall-json` package using `brew`:
 
@@ -58,7 +105,7 @@ $ dhall-to-json --help
 $ dhall-to-yaml --help
 ```
 
-### Install a statically linked binary (Linux)
+### Linux - Install a prebuilt executable
 
 To install the latest stable release, visit the release page here:
 
@@ -95,43 +142,6 @@ $ cp ./bin/dhall-to-{json,yaml} /usr/local/bin
 
 ... and then run the following command to verify that the two
 executables are on your executable search `PATH`:
-
-```bash
-$ dhall-to-json --help
-$ dhall-to-yaml --help
-```
-
-### Install using `stack`, the Haskell build tool (Windows)
-
-> **Windows users**: Install [Git for Windows](http://gitforwindows.org/), which
-> includes Git Bash: a command line environment complete with Unix utilities.
-> Run the following commands within a Git Bash shell.
-
-Install `stack` by following the instructions on <https://haskellstack.org>
-
-Then run the following commands to install the `dhall-json` package:
-
-```bash
-$ stack setup
-$ stack install dhall-json
-```
-
-This will install the `dhall-to-json` and `dhall-to-yaml` executables to
-some shared directory (such as `%APPDATA%\local\bin` on Windows or
-`~/.local/bin` on Linux / OS X).
-
-`stack` will remind you to add the above shared directory to your executable
-search `PATH`.  Don't forget to do this!
-
-Run the following command to verify that `stack` installed the executable:
-
-```bash
-$ ~/.local/bin/dhall-to-json --help
-$ ~/.local/bin/dhall-to-yaml --help
-```
-
-... and then run the following command to verify that the executable is on your
-executable search `PATH`:
 
 ```bash
 $ dhall-to-json --help
