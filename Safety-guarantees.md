@@ -112,7 +112,7 @@ The first part of the output is the inferred type of the expression, which
 summarizes what the function does.  The second line of the output is the
 "normal form" of the expression (i.e. the expression with all indirection
 removed).  The latter normal form is what you audit when examining untrusted
-code.  Every Dhall expression has a canonical normal form because the the Dhall
+code.  Every Dhall expression has a canonical normal form because the Dhall
 configuration language is not Turing-complete.
 
 If you understand and trust what you see then you can freeze the import using
