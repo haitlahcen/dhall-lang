@@ -39,3 +39,7 @@ Uses `dhall-haskell` to define logs for parsing. The software generates a specif
 ## [NoRedInk](https://t.co/FTLTeyzykY)
 
 Uses `dhall` to configure their build process
+
+## [FretLink](https://t.co/FTLTeyzykY)
+
+Uses Dhall to configure ansible/projects configurations
