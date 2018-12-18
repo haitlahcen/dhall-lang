@@ -75,51 +75,55 @@ command-line interpreter named `dhall` to retrieve, type-check, and remove all
 indirection in the expression, like this:
 
 ```bash
-$ dhall <<< 'http://prelude.dhall-lang.org/Text/concatSep'
+$ dhall --annotate <<< 'http://prelude.dhall-lang.org/Text/concatSep'
 ```
 
 ```haskell
-∀(separator : Text) → ∀(elements : List Text) → Text
-```
-
-```haskell
-  λ(separator : Text)
-→ λ(elements : List Text)
-→ merge
-  { Empty = λ(_ : {}) → "", NonEmpty = λ(result : Text) → result }
-  ( List/fold
-    Text
-    elements
-    < Empty : {} | NonEmpty : Text >
-    (   λ(element : Text)
-      → λ(status : < Empty : {} | NonEmpty : Text >)
-      → merge
-        { Empty =
-            λ(_ : {}) → < NonEmpty = element | Empty : {} >
-        , NonEmpty =
-              λ(result : Text)
-            → < NonEmpty = element ++ separator ++ result | Empty : {} >
-        }
-        status
-        : < Empty : {} | NonEmpty : Text >
-    )
-    < Empty = {=} | NonEmpty : Text >
+  (   λ(separator : Text)
+    → λ(elements : List Text)
+    → merge
+      { Empty = λ(_ : {}) → "", NonEmpty = λ(result : Text) → result }
+      ( List/fold
+        Text
+        elements
+        < Empty : {} | NonEmpty : Text >
+        (   λ(element : Text)
+          → λ(status : < Empty : {} | NonEmpty : Text >)
+          → merge
+            { Empty =
+                λ(_ : {}) → < NonEmpty = element | Empty : {} >
+            , NonEmpty =
+                  λ(result : Text)
+                → < NonEmpty = element ++ separator ++ result | Empty : {} >
+            }
+            status
+            : < Empty : {} | NonEmpty : Text >
+        )
+        < Empty = {=} | NonEmpty : Text >
+      )
+      : Text
   )
-  : Text
+: ∀(separator : Text) → ∀(elements : List Text) → Text
 ```
 
-The first part of the output is the inferred type of the expression, which
-summarizes what the function does.  The second line of the output is the
-"normal form" of the expression (i.e. the expression with all indirection
-removed).  The latter normal form is what you audit when examining untrusted
-code.  Every Dhall expression has a canonical normal form because the Dhall
-configuration language is not Turing-complete.
+The `--annotate` flag adds a type annotation to the end of the expression,
+which summarizes what the function does:
+
+```haskell
+: ∀(separator : Text) → ∀(elements : List Text) → Text
+```
+
+The expression preceding the type annotation is the "normal form" of the
+expression (i.e. the expression with all indirection removed).  This
+indirection-free normal form is what you audit when examining untrusted code.
+Every Dhall expression has a canonical normal form because the Dhall configuration
+language is not Turing-complete.
 
 If you understand and trust what you see then you can freeze the import using
-an integrity check.  If you replace the `dhall` command with `dhall-hash`:
+an integrity check.  If you replace the `dhall` command with `dhall hash`:
 
 ```haskell
-$ dhall-hash <<< 'http://prelude.dhall-lang.org/Text/concatSep'
+$ dhall hash <<< 'http://prelude.dhall-lang.org/Text/concatSep'
 ```
 
 ```
@@ -136,6 +140,13 @@ in  { name = env:USER as Text
     , age  = 23
     , hobbies = concatSep ", " [ "piano", "reading", "skiing" ]
     } : ./schema.dhall
+```
+
+You can also automatically freeze all imports within a file using
+the following command:
+
+```bash
+$ dhall freeze --inplace ./example.dhall
 ```
 
 An import frozen in this way can never successfully return a different
